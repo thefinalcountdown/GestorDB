@@ -47,14 +47,14 @@ public class GestorBD {
 	
 	public ArrayList<Ubicacion> comboBoxUbicacion() throws Exception {
 		ArrayList<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
-
+		String sentencia = "select distinct(ubicacion) from hoteles";
 		try {
 
 			statement = conexion.createStatement();
 
-			result = statement.executeQuery("select distinct ubicacion from hoteles");
+			result = statement.executeQuery(sentencia);
 			while (result.next()) {
-				ubicaciones.add(new Ubicacion(result.getString("Ubicacion")));
+				ubicaciones.add(new Ubicacion(result.getString("ubicacion")));
 
 			}
 
