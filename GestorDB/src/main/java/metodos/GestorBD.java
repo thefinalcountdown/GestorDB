@@ -1,7 +1,7 @@
 package metodos;
 
 import java.sql.Connection;
-import Modelo.Ubicacion;
+//import Reto4_TFC.Modelo.Ubicacion;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,8 +17,8 @@ public class GestorBD {
 	private int puerto = 3306;
 	private String servidor = "";
 	private static Connection conexion = null;
-	Statement statement;
-	ResultSet result;
+	private static Statement statement;
+	private static ResultSet result;
 
 	public GestorBD() {
 
@@ -45,8 +45,8 @@ public class GestorBD {
 	}
 	
 	
-	public ArrayList<Ubicacion> comboBoxUbicacion() throws Exception {
-		ArrayList<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
+	public static ArrayList<String> obtenerUbicaciones() throws Exception {
+		ArrayList<String> ubicaciones = new ArrayList<String>();
 		String sentencia = "select distinct(ubicacion) from hoteles";
 		try {
 
@@ -54,7 +54,7 @@ public class GestorBD {
 
 			result = statement.executeQuery(sentencia);
 			while (result.next()) {
-				ubicaciones.add(new Ubicacion(result.getString("ubicacion")));
+				ubicaciones.add(new String(result.getString("ubicacion")));
 
 			}
 
