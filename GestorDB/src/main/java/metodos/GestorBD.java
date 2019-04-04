@@ -1,11 +1,14 @@
 package metodos;
 
 import java.sql.Connection;
+import Modelo.Ubicacion;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class GestorBD {
 	private String maquina = "localhost";
@@ -14,6 +17,8 @@ public class GestorBD {
 	private int puerto = 3306;
 	private String servidor = "";
 	private static Connection conexion = null;
+	Statement statement;
+	ResultSet result;
 
 	public GestorBD() {
 
@@ -37,5 +42,25 @@ public class GestorBD {
 
 	public Connection getConexion() {
 		return conexion;
+	}
+	
+	
+	public ArrayList<Ubicacion> comboBoxUbicacion() throws Exception {
+		ArrayList<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
+
+		try {
+
+			statement = conexion.createStatement();
+
+			result = statement.executeQuery("select distinct ubicacion from hoteles");
+			while (result.next()) {
+				ubicaciones.add(new Ubicacion(result.getString("Ubicacion")));
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ubicaciones;
 	}
 }
