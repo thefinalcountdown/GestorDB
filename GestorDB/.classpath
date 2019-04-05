@@ -3,6 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/eclipse/plugins/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="output" path="bin/main"/>
 </classpath>
