@@ -63,4 +63,27 @@ public class GestorBD {
 		}
 		return ubicaciones;
 	}
+	
+	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
+		ArrayList<String> hoteles = new ArrayList<String>();
+		String sentencia = "select * from hoteles where ubicacion='%s'";
+		sentencia = String.format(sentencia, ubicacion);
+		try {
+
+			statement = conexion.createStatement();
+
+			result = statement.executeQuery(sentencia);
+			while (result.next()) {
+				String nombre =result.getString("nombre");
+				String precio= Integer.toString(result.getInt("precio"));
+				String estrellas=Integer.toString(result.getInt("estrellas"));
+				hoteles.add(new String(nombre+" "+precio+" "+estrellas));
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hoteles;
+	}
 }
