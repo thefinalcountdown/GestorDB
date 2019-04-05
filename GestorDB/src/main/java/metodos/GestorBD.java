@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class GestorBD {
 	private String maquina = "localhost";
 	private String usuario = "root";
@@ -27,17 +29,20 @@ public class GestorBD {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.err.println("Error al registrar el Driver");
+			JOptionPane.showMessageDialog(null, "Error al registrar el Driver");
+			//System.err.println("Error al registrar el Driver");
 			System.exit(0);
 		}
 
 		try {
 			conexion = DriverManager.getConnection(servidor, usuario, clave);
 		} catch (SQLException e) {
-			System.err.println("Error al conectar con el servidor");
+			JOptionPane.showMessageDialog(null, "Error al conectar con el servidor");
+			//System.err.println("Error al conectar con el servidor");
 			System.exit(0);
 		}
-		System.out.println("Conectando a la base de datos...");
+		JOptionPane.showMessageDialog(null, "Conectando a la base de datos...");
+		//System.out.println("Conectando a la base de datos...");
 	}
 
 	public Connection getConexion() {
