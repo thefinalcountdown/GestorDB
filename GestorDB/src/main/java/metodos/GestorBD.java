@@ -82,7 +82,7 @@ public class GestorBD {
 				String nombre =result.getString("nombre");
 				String precio= Integer.toString(result.getInt("precio"));
 				String estrellas=Integer.toString(result.getInt("estrellas"));
-				hoteles.add(new String(nombre+" "+precio+" "+estrellas));
+				hoteles.add(new String(nombre+"; "+precio+"; "+estrellas));
 
 			}
 
