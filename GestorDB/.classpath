@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
-<<<<<<< HEAD
-=======
-	<classpathentry kind="lib" path="mysql-connector-java-8.0.13.jar"/>
->>>>>>> rama1
+	<classpathentry exported="true" kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry exported="true" kind="lib" path="mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="output" path="bin/main"/>
 </classpath>
