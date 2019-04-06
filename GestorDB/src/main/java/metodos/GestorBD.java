@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class GestorBD {
 	private String maquina = "localhost";
 	private String usuario = "root";
@@ -27,17 +29,20 @@ public class GestorBD {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.err.println("Error al registrar el Driver");
+			JOptionPane.showMessageDialog(null, "Error al registrar el Driver");
+			//System.err.println("Error al registrar el Driver");
 			System.exit(0);
 		}
 
 		try {
 			conexion = DriverManager.getConnection(servidor, usuario, clave);
 		} catch (SQLException e) {
-			System.err.println("Error al conectar con el servidor");
+			JOptionPane.showMessageDialog(null, "Error al conectar con el servidor");
+			//System.err.println("Error al conectar con el servidor");
 			System.exit(0);
 		}
-		System.out.println("Conectando a la base de datos...");
+		JOptionPane.showMessageDialog(null, "Conectando a la base de datos...");
+		//System.out.println("Conectando a la base de datos...");
 	}
 
 	public Connection getConexion() {
@@ -62,5 +67,28 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 		return ubicaciones;
+	}
+	
+	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
+		ArrayList<String> hoteles = new ArrayList<String>();
+		String sentencia = "select * from hoteles where ubicacion='%s'";
+		sentencia = String.format(sentencia, ubicacion);
+		try {
+
+			statement = conexion.createStatement();
+
+			result = statement.executeQuery(sentencia);
+			while (result.next()) {
+				String nombre =result.getString("nombre");
+				String precio= Integer.toString(result.getInt("precio"));
+				String estrellas=Integer.toString(result.getInt("estrellas"));
+				hoteles.add(new String(nombre+";"+precio+"; "+estrellas));
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hoteles;
 	}
 }
