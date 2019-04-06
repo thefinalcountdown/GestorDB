@@ -21,6 +21,7 @@ public class GestorBD {
 	private static Connection conexion = null;
 	private static Statement statement;
 	private static ResultSet result;
+	private static PreparedStatement preparedstatement;
 
 	public GestorBD() {
 
@@ -30,7 +31,7 @@ public class GestorBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Error al registrar el Driver");
-			//System.err.println("Error al registrar el Driver");
+			// System.err.println("Error al registrar el Driver");
 			System.exit(0);
 		}
 
@@ -38,18 +39,17 @@ public class GestorBD {
 			conexion = DriverManager.getConnection(servidor, usuario, clave);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error al conectar con el servidor");
-			//System.err.println("Error al conectar con el servidor");
+			// System.err.println("Error al conectar con el servidor");
 			System.exit(0);
 		}
 		JOptionPane.showMessageDialog(null, "Conectando a la base de datos...");
-		//System.out.println("Conectando a la base de datos...");
+		// System.out.println("Conectando a la base de datos...");
 	}
 
 	public Connection getConexion() {
 		return conexion;
 	}
-	
-	
+
 	public static ArrayList<String> obtenerUbicaciones() throws Exception {
 		ArrayList<String> ubicaciones = new ArrayList<String>();
 		String sentencia = "select distinct(ubicacion) from hoteles";
@@ -68,7 +68,7 @@ public class GestorBD {
 		}
 		return ubicaciones;
 	}
-	
+
 	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
 		ArrayList<String> hoteles = new ArrayList<String>();
 		String sentencia = "select * from hoteles where ubicacion='%s'";
@@ -79,10 +79,10 @@ public class GestorBD {
 
 			result = statement.executeQuery(sentencia);
 			while (result.next()) {
-				String nombre =result.getString("nombre");
-				String precio= Integer.toString(result.getInt("precio"));
-				String estrellas=Integer.toString(result.getInt("estrellas"));
-				hoteles.add(new String(nombre+";"+precio+"; "+estrellas));
+				String nombre = result.getString("nombre");
+				String precio = Integer.toString(result.getInt("precio"));
+				String estrellas = Integer.toString(result.getInt("estrellas"));
+				hoteles.add(new String(nombre + ";" + precio + "; " + estrellas));
 
 			}
 
@@ -91,4 +91,58 @@ public class GestorBD {
 		}
 		return hoteles;
 	}
+
+	public static boolean comprobarUsuario(String dni) {
+		String sentencia = "select * from Usuarios where DNI=\""+ dni +"\"";
+		try {
+			preparedstatement = conexion.prepareStatement(sentencia);
+			result = preparedstatement.executeQuery();
+			if (result.next() == true) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+		}
+		return false;
+	}
+
+	public static boolean comprobarCampos(String dni, String nombre, String apellido, String clave) {
+		String sentencia = "insert into usuario(DNI, Nombre, Apellido, Clave)" + "values(\"" + dni + "\", \"" + nombre
+				+ "\", \"" + apellido + "\", \"" + clave + "\")";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			if(dni.equals("") || nombre.equals("") || apellido.equals("") || clave.equals("")) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+
+		}
+		return false;
+
+	}
+
+	public static boolean insertarUsuario(String dni, String nombre, String apellido, String clave) {
+		String sentencia = "insert into usuario(DNI, Nombre, Apellido, Clave)" + "values(\"" + dni + "\", \"" + nombre
+				+ "\", \"" + apellido + "\", \"" + clave + "\")";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+
+		}
+		return false;
+	}
+
 }
