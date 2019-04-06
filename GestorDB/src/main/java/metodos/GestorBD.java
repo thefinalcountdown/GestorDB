@@ -52,7 +52,7 @@ public class GestorBD {
 
 	public static ArrayList<String> obtenerUbicaciones() throws Exception {
 		ArrayList<String> ubicaciones = new ArrayList<String>();
-		String sentencia = "select distinct(ubicacion) from hoteles";
+		String sentencia = "select distinct(ubicacion) from hoteles order by ubicacion";
 		try {
 
 			statement = conexion.createStatement();
