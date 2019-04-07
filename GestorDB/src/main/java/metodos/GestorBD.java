@@ -21,6 +21,7 @@ public class GestorBD {
 	private static Connection conexion = null;
 	private static Statement statement;
 	private static ResultSet result;
+	private static PreparedStatement preparedstatement;
 
 	public GestorBD() {
 
@@ -91,4 +92,58 @@ public class GestorBD {
 		}
 		return hoteles;
 	}
+	
+	public static boolean comprobarUsuario(String dni) {
+		String sentencia = "select * from Usuarios where DNI=\""+ dni +"\"";
+		try {
+			preparedstatement = conexion.prepareStatement(sentencia);
+			result = preparedstatement.executeQuery();
+			if (result.next() == true) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+		}
+		return false;
+	}
+
+	public static boolean comprobarCampos(String dni, String nombre, String apellido, String clave) {
+		String sentencia = "insert into usuario(DNI, Nombre, Apellido, Clave)" + "values(\"" + dni + "\", \"" + nombre
+				+ "\", \"" + apellido + "\", \"" + clave + "\")";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			if(dni.equals("") || nombre.equals("") || apellido.equals("") || clave.equals("")) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+
+		}
+		return false;
+
+	}
+
+	public static boolean insertarUsuario(String dni, String nombre, String apellido, String clave) {
+		String sentencia = "insert into usuario(DNI, Nombre, Apellido, Clave)" + "values(\"" + dni + "\", \"" + nombre
+				+ "\", \"" + apellido + "\", \"" + clave + "\")";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la Base de Datos");
+
+		}
+		return false;
+	}
+
 }
