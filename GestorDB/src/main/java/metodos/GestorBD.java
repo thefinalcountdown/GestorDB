@@ -1,7 +1,9 @@
 package metodos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
-//import Reto4_TFC.Modelo.Ubicacion;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
 
@@ -69,7 +72,8 @@ public class GestorBD {
 		return ubicaciones;
 	}
 
-	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
+	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception 
+	{
 		ArrayList<String> hoteles = new ArrayList<String>();
 		String sentencia = "select * from hoteles where ubicacion='%s'";
 		sentencia = String.format(sentencia, ubicacion);
@@ -91,6 +95,51 @@ public class GestorBD {
 		}
 		return hoteles;
 	}
+	
+	
+	public static void introducir_reserva()
+	{
+		try
+		{
+			String linea;
+			FileReader fichero = new FileReader("Reto4_TFC\\ficheroReserva.txt");
+			BufferedReader buf = new BufferedReader(fichero);
+			
+			ArrayList <String> fichero_texto = new ArrayList<String>();
+			ArrayList <String> palabra = new ArrayList<String>();
+			
+			while ((linea = buf.readLine()) != null)
+			{
+				fichero_texto.add(linea);
+			}
+			
+			for(int cont=0; cont < fichero_texto.size(); cont++)
+			{
+				int posicion = fichero_texto.size() - cont - 1;
+				String [] partes = fichero_texto.get(cont).split(": ");
+				palabra.add(partes[1]);
+			}
+			
+			
+			String nombreHotel = palabra.get(0);
+			int numPersonas = Integer.parseInt(palabra.get(1));
+			String ubicacion = palabra.get(2);
+			float precio = Float.parseFloat(palabra.get(3));
+			for(int cont=0; cont<palabra.size(); cont++)
+			{
+				System.out.println(palabra.get(cont));
+			}
+			
+			buf.close();
+			fichero.close();
+		}
+		catch(IOException ex)
+		{
+			 System.err.println("No se puede leer del archivo");
+		   	 System.exit(-1);
+		}
+	}
+	
 
 	public static ResultSet consulta(String sentencia) {
 		try {
