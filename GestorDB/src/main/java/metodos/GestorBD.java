@@ -25,7 +25,6 @@ public class GestorBD {
 	private static Statement statement;
 	private static ResultSet result;
 	private static PreparedStatement preparedstatement;
-	
 
 	public GestorBD() {
 
@@ -73,8 +72,7 @@ public class GestorBD {
 		return ubicaciones;
 	}
 
-	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception 
-	{
+	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
 		ArrayList<String> hoteles = new ArrayList<String>();
 		String sentencia = "select * from hoteles where ubicacion='%s'";
 		sentencia = String.format(sentencia, ubicacion);
@@ -96,33 +94,98 @@ public class GestorBD {
 		}
 		return hoteles;
 	}
-	
-	
-	public static void insertarReserva(ArrayList <String> reserva) throws Exception 
-	{
-	    try 
-	    {
-	    	String sentencia = "insert into reservas(DNI,Nombre,Apellidos,Fecha_nac,Sexo,ContraseÃ±a) "
-            		+ "values ("+reserva.get(0)+","+reserva.get(1)+","+reserva.get(2)+","+reserva.get(3)+")";
-	        statement = conexion.createStatement();
-	        
-	        
-	        preparedstatement = conexion.prepareStatement(sentencia);
-	        preparedstatement.executeUpdate();
-	
-	        JOptionPane.showMessageDialog(null, "Datos correctamente ingresados");
-	    } 
-	    catch (Exception e) 
-	    {
-	    	e.printStackTrace();
-	    	JOptionPane.showMessageDialog(null, "Error al enviar a informacion a la Base de Datos");		    	
-	    }
+
+	public static void insertarReserva(ArrayList<String> reserva) throws Exception {
+		try {
+			String sentencia = "insert into reservas(DNI,Nombre,Apellidos,Fecha_nac,Sexo,ContraseÃ±a) " + "values ("
+					+ reserva.get(0) + "," + reserva.get(1) + "," + reserva.get(2) + "," + reserva.get(3) + ")";
+			statement = conexion.createStatement();
+
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Datos correctamente ingresados");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al enviar a informacion a la Base de Datos");
+		}
 	}
-	
-	
+
+	public static boolean comprobarUsuario(String dni, String clave) {
+		String sentencia = "select * from Usuario where DNI=\"" + dni + "\" and Clave=\"" + clave + "\"";
+		try {
+			preparedstatement = conexion.prepareStatement(sentencia);
+			result = preparedstatement.executeQuery();
+			if (result.next() == true) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean insertarUsuario(String dni, String nombre, String apellidos, String clave) {
+		String sentencia = "insert into Usuario(DNI, Nombre, Apellido, Clave) " + "values(\"" + dni + "\", \"" + nombre
+				+ "\", \"" + apellidos + "\", \"" + clave + "\")";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public static void borrarUsuario(String logindni, String loginpass) {
+		String sentencia = "delete from cliente where DNI=\"" + logindni + "\" and Contraseña=\"" + loginpass + "\"";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+
+		} catch (Exception error) {
+			error.printStackTrace();
+
+		}
+	}
+
+	public static void actualizarUsuario(String dni, String clave, String nuevaclave) {
+		String sentencia = "update Usuario set Clave=\"" + nuevaclave + "\" where DNI=\"" + dni + "\" and Clave=\""
+				+ clave + "\"";
+		try {
+			statement = conexion.createStatement();
+			preparedstatement = conexion.prepareStatement(sentencia);
+			preparedstatement.executeUpdate();
+
+		} catch (Exception error) {
+			error.printStackTrace();
+
+		}
+	}
+
+	public static boolean introducirLogin(String logindni, String loginpass) {
+
+		String sentencia = "select DNI, Contraseña from cliente where DNI=\"" + logindni + "\" and Contraseña=\""
+				+ loginpass + "\"";
+
+		try {
+			statement = conexion.createStatement();
+			result = statement.executeQuery(sentencia);
+			return result.first();
+		} catch (Exception error) {
+			error.printStackTrace();
+		}
+		return false;
+	}
 
 	public static ResultSet consulta(String sentencia) {
-		
+
 		try {
 			preparedstatement = conexion.prepareStatement(sentencia);
 			result = preparedstatement.executeQuery();
@@ -131,10 +194,6 @@ public class GestorBD {
 		}
 		return result;
 	}
-	
-
-	
-	
 
 	public static boolean insertarDatos(String sentencia) {
 		try {
