@@ -98,7 +98,7 @@ public class GestorBD {
 	}
 	
 	
-	public void insertarReserva(ArrayList <String> reserva) throws Exception 
+	public static void insertarReserva(ArrayList <String> reserva) throws Exception 
 	{
 	    try 
 	    {
