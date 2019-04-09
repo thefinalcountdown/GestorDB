@@ -25,6 +25,7 @@ public class GestorBD {
 	private static Statement statement;
 	private static ResultSet result;
 	private static PreparedStatement preparedstatement;
+	
 
 	public GestorBD() {
 
@@ -142,14 +143,19 @@ public class GestorBD {
 	
 
 	public static ResultSet consulta(String sentencia) {
+		
 		try {
 			preparedstatement = conexion.prepareStatement(sentencia);
-			ResultSet result = preparedstatement.executeQuery();
+			result = preparedstatement.executeQuery();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
 		}
 		return result;
 	}
+	
+
+	
+	
 
 	public static boolean insertarDatos(String sentencia) {
 		try {
