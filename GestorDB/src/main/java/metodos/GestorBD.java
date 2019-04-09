@@ -98,9 +98,8 @@ public class GestorBD {
 	}
 	
 	
-	public void insertarReserva() throws Exception 
+	public void insertarReserva(ArrayList <String> reserva) throws Exception 
 	{
-		ArrayList <String> reserva = introducir_reserva();
 	    try 
 	    {
 	    	String sentencia = "insert into reservas(DNI,Nombre,Apellidos,Fecha_nac,Sexo,Contraseña) "
@@ -120,43 +119,6 @@ public class GestorBD {
 	    }
 	}
 	
-	
-	public static ArrayList<String> introducir_reserva()
-	{
-		ArrayList <String> fichero_texto = new ArrayList<String>();
-		ArrayList <String> palabra = new ArrayList<String>();
-		
-		try
-		{
-			String linea;
-			FileReader fichero = new FileReader("Reto4_TFC\\ficheroReserva.txt");
-			BufferedReader buf = new BufferedReader(fichero);
-			
-			
-			while ((linea = buf.readLine()) != null)
-			{
-				fichero_texto.add(linea);
-			}
-			
-			for(int cont=0; cont < fichero_texto.size(); cont++)
-			{
-				int posicion = fichero_texto.size() - cont - 1;
-				String [] partes = fichero_texto.get(cont).split(": ");
-				palabra.add(partes[1]);
-			}
-			
-			
-			buf.close();
-			fichero.close();
-		}
-		catch(IOException ex)
-		{
-			 System.err.println("No se puede leer del archivo");
-		   	 System.exit(-1);
-		}
-		
-		return palabra;
-	}
 	
 
 	public static ResultSet consulta(String sentencia) {
