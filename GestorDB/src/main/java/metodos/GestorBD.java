@@ -98,16 +98,40 @@ public class GestorBD {
 	}
 	
 	
-	public static void introducir_reserva()
+	public void insertarReserva() throws Exception 
 	{
+		ArrayList <String> reserva = introducir_reserva();
+	    try 
+	    {
+	    	String sentencia = "insert into reservas(DNI,Nombre,Apellidos,Fecha_nac,Sexo,Contraseña) "
+            		+ "values ("+reserva.get(0)+","+reserva.get(1)+","+reserva.get(2)+","+reserva.get(3)+")";
+	        statement = conexion.createStatement();
+	        
+	        
+	        preparedstatement = conexion.prepareStatement(sentencia);
+	        preparedstatement.executeUpdate();
+	
+	        JOptionPane.showMessageDialog(null, "Datos correctamente ingresados");
+	    } 
+	    catch (Exception e) 
+	    {
+	    	e.printStackTrace();
+	    	JOptionPane.showMessageDialog(null, "Error al enviar a informacion a la Base de Datos");		    	
+	    }
+	}
+	
+	
+	public static ArrayList<String> introducir_reserva()
+	{
+		ArrayList <String> fichero_texto = new ArrayList<String>();
+		ArrayList <String> palabra = new ArrayList<String>();
+		
 		try
 		{
 			String linea;
 			FileReader fichero = new FileReader("Reto4_TFC\\ficheroReserva.txt");
 			BufferedReader buf = new BufferedReader(fichero);
 			
-			ArrayList <String> fichero_texto = new ArrayList<String>();
-			ArrayList <String> palabra = new ArrayList<String>();
 			
 			while ((linea = buf.readLine()) != null)
 			{
@@ -122,15 +146,6 @@ public class GestorBD {
 			}
 			
 			
-			String nombreHotel = palabra.get(0);
-			int numPersonas = Integer.parseInt(palabra.get(1));
-			String ubicacion = palabra.get(2);
-			float precio = Float.parseFloat(palabra.get(3));
-			for(int cont=0; cont<palabra.size(); cont++)
-			{
-				System.out.println(palabra.get(cont));
-			}
-			
 			buf.close();
 			fichero.close();
 		}
@@ -139,6 +154,8 @@ public class GestorBD {
 			 System.err.println("No se puede leer del archivo");
 		   	 System.exit(-1);
 		}
+		
+		return palabra;
 	}
 	
 
