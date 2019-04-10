@@ -122,7 +122,7 @@ public class GestorBD {
 				return false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
 		}
 		return false;
 	}
@@ -136,21 +136,21 @@ public class GestorBD {
 			preparedstatement.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
 		}
 		return false;
 
 	}
 
 	public static void borrarUsuario(String logindni, String loginpass) {
-		String sentencia = "delete from cliente where DNI=\"" + logindni + "\" and Contraseña=\"" + loginpass + "\"";
+		String sentencia = "delete from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass + "\"";
 		try {
 			statement = conexion.createStatement();
 			preparedstatement = conexion.prepareStatement(sentencia);
 			preparedstatement.executeUpdate();
 
 		} catch (Exception error) {
-			error.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
 
 		}
 	}
@@ -164,22 +164,22 @@ public class GestorBD {
 			preparedstatement.executeUpdate();
 
 		} catch (Exception error) {
-			error.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
 
 		}
 	}
 
 	public static boolean introducirLogin(String logindni, String loginpass) {
 
-		String sentencia = "select DNI, Contraseña from cliente where DNI=\"" + logindni + "\" and Contraseña=\""
-				+ loginpass + "\"";
+		String sentencia = "select DNI, Contraseña from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass
+				+ "\"";
 
 		try {
 			statement = conexion.createStatement();
 			result = statement.executeQuery(sentencia);
 			return result.first();
 		} catch (Exception error) {
-			error.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
 		}
 		return false;
 	}
