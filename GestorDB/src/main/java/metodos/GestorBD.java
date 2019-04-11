@@ -97,8 +97,9 @@ public class GestorBD {
 
 	public static void insertarReserva(ArrayList<String> reserva) throws Exception {
 		try {
-			String sentencia = "insert into reservas(DNI,Nombre,Apellidos,Fecha_nac,Sexo,ContraseÃ±a) " + "values ("
-					+ reserva.get(0) + "," + reserva.get(1) + "," + reserva.get(2) + "," + reserva.get(3) + ")";
+			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida) values ('"
+					+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2)) + "," + Integer.parseInt(reserva.get(3))
+					+ ",'" + reserva.get(4) + "','" + reserva.get(5) + "','" + reserva.get(6) + "')";
 			statement = conexion.createStatement();
 
 			preparedstatement = conexion.prepareStatement(sentencia);
@@ -171,7 +172,7 @@ public class GestorBD {
 
 	public static boolean introducirLogin(String logindni, String loginpass) {
 
-		String sentencia = "select DNI, Contraseña from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass
+		String sentencia = "select DNI, Contraseï¿½a from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass
 				+ "\"";
 
 		try {
