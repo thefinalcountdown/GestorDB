@@ -49,7 +49,7 @@ public class GestorBD {
 		// System.out.println("Conectando a la base de datos...");
 	}
 
-	public Connection getConexion() {
+	public static Connection getConexion() {
 		return conexion;
 	}
 
@@ -111,79 +111,6 @@ public class GestorBD {
 		}
 	}
 
-	public static boolean comprobarUsuario(String dni, String clave) {
-		String sentencia = "select * from Usuario where DNI=\"" + dni + "\" and Clave=\"" + clave + "\"";
-		try {
-			preparedstatement = conexion.prepareStatement(sentencia);
-			result = preparedstatement.executeQuery();
-			if (result.next() == true) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-	}
-
-	public static boolean insertarUsuario(String dni, String nombre, String apellidos, String clave) {
-		String sentencia = "insert into Usuario(DNI, Nombre, Apellido, Clave) " + "values(\"" + dni + "\", \"" + nombre
-				+ "\", \"" + apellidos + "\", \"" + clave + "\")";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-			return true;
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-
-	}
-
-	public static void borrarUsuario(String logindni, String loginpass) {
-		String sentencia = "delete from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass + "\"";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-
-		}
-	}
-
-	public static void actualizarUsuario(String dni, String clave, String nuevaclave) {
-		String sentencia = "update Usuario set Clave=\"" + nuevaclave + "\" where DNI=\"" + dni + "\" and Clave=\""
-				+ clave + "\"";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-
-		}
-	}
-
-	public static boolean introducirLogin(String logindni, String loginpass) {
-
-		String sentencia = "select DNI, Contraseña from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass
-				+ "\"";
-
-		try {
-			statement = conexion.createStatement();
-			result = statement.executeQuery(sentencia);
-			return result.first();
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-	}
-
 	public static ResultSet consulta(String sentencia) {
 
 		try {
@@ -204,5 +131,22 @@ public class GestorBD {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean isDbConnected() {
+		final String CHECK_SQL_QUERY = "SELECT 1";
+		boolean isConnected = false;
+		try {
+			final PreparedStatement statement = GestorBD.getConexion().prepareStatement(CHECK_SQL_QUERY);
+			result = statement.executeQuery();
+			String cadena = "";
+			while (result.next())
+				cadena = result.getString(1);
+			if (cadena.equals("1"))
+				isConnected = true;
+		} catch (SQLException | NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos...");
+		}
+		return isConnected;
 	}
 }
