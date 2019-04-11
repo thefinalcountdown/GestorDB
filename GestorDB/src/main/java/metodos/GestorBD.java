@@ -98,8 +98,9 @@ public class GestorBD {
 	public static void insertarReserva(ArrayList<String> reserva) throws Exception {
 		try {
 			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida) values ('"
-					+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2)) + "," + Integer.parseInt(reserva.get(3))
-					+ ",'" + reserva.get(4) + "','" + reserva.get(5) + "','" + reserva.get(6) + "')";
+					+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
+					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','"
+					+ reserva.get(6) + "')";
 			statement = conexion.createStatement();
 
 			preparedstatement = conexion.prepareStatement(sentencia);
@@ -112,79 +113,6 @@ public class GestorBD {
 		}
 	}
 
-	public static boolean comprobarUsuario(String dni, String clave) {
-		String sentencia = "select * from Usuario where DNI=\"" + dni + "\" and Clave=\"" + clave + "\"";
-		try {
-			preparedstatement = conexion.prepareStatement(sentencia);
-			result = preparedstatement.executeQuery();
-			if (result.next() == true) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-	}
-
-	public static boolean insertarUsuario(String dni, String nombre, String apellidos, String clave) {
-		String sentencia = "insert into Usuario(DNI, Nombre, Apellido, Clave) " + "values(\"" + dni + "\", \"" + nombre
-				+ "\", \"" + apellidos + "\", \"" + clave + "\")";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-			return true;
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-
-	}
-
-	public static void borrarUsuario(String logindni, String loginpass) {
-		String sentencia = "delete from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass + "\"";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-
-		}
-	}
-
-	public static void actualizarUsuario(String dni, String clave, String nuevaclave) {
-		String sentencia = "update Usuario set Clave=\"" + nuevaclave + "\" where DNI=\"" + dni + "\" and Clave=\""
-				+ clave + "\"";
-		try {
-			statement = conexion.createStatement();
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-
-		}
-	}
-
-	public static boolean introducirLogin(String logindni, String loginpass) {
-
-		String sentencia = "select DNI, Contrase�a from Usuario where DNI=\"" + logindni + "\" and Clave=\"" + loginpass
-				+ "\"";
-
-		try {
-			statement = conexion.createStatement();
-			result = statement.executeQuery(sentencia);
-			return result.first();
-		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos...");
-		}
-		return false;
-	}
-    
 	public static ResultSet consulta(String sentencia) {
 
 		try {
