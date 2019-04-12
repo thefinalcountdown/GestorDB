@@ -24,7 +24,7 @@ public class GestorBD {
 	public GestorBD() {
 
 		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/bidaion?serverTimezone=UTC";
-
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -92,10 +92,10 @@ public class GestorBD {
 
 	public static void insertarReserva(ArrayList<String> reserva) throws Exception {
 		try {
-			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida) values ('"
-					+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
-					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','"
-					+ reserva.get(6) + "')";
+			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida,Usuario, DniUsuario)"
+					+ " values ('"+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
+					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','" + reserva.get(6) + 
+					reserva.get(7) + "','" + reserva.get(8) +"')";
 			statement = conexion.createStatement();
 
 			preparedstatement = conexion.prepareStatement(sentencia);
