@@ -1,5 +1,6 @@
 package metodos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,59 +24,75 @@ public class GestorBD {
 	public GestorBD() {
 
 		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/bidaion?serverTimezone=UTC";
-
-		try {
+		
+		try 
+		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+		} 
+		catch (ClassNotFoundException e) 
+		{
 			JOptionPane.showMessageDialog(null, "Error al registrar el Driver");
 			// System.err.println("Error al registrar el Driver");
 			System.exit(0);
 		}
 
-		try {
+		try 
+		{
 			conexion = DriverManager.getConnection(servidor, usuario, clave);
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			JOptionPane.showMessageDialog(null, "Error al conectar con el servidor");
 			// System.err.println("Error al conectar con el servidor");
 			System.exit(0);
 		}
+		
 		JOptionPane.showMessageDialog(null, "Conectando a la base de datos...");
 		// System.out.println("Conectando a la base de datos...");
 	}
 
-	public static Connection getConexion() {
+	public static Connection getConexion() 
+	{
 		return conexion;
 	}
 
-	public static ArrayList<String> obtenerUbicaciones() throws Exception {
+	public static ArrayList<String> obtenerUbicaciones() throws Exception 
+	{
 		ArrayList<String> ubicaciones = new ArrayList<String>();
 		String sentencia = "select distinct(ubicacion) from hoteles order by ubicacion";
-		try {
+		try 
+		{
 
 			statement = conexion.createStatement();
 
 			result = statement.executeQuery(sentencia);
-			while (result.next()) {
+			while (result.next()) 
+			{
 				ubicaciones.add(new String(result.getString("ubicacion")));
 
 			}
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 		return ubicaciones;
 	}
 
-	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception {
+	public static ArrayList<String> obtenerHoteles(String ubicacion) throws Exception 
+	{
 		ArrayList<String> hoteles = new ArrayList<String>();
 		String sentencia = "select * from hoteles where ubicacion='%s'";
 		sentencia = String.format(sentencia, ubicacion);
-		try {
+		try 
+		{
 
 			statement = conexion.createStatement();
 
 			result = statement.executeQuery(sentencia);
-			while (result.next()) {
+			while (result.next()) 
+			{
 				String nombre = result.getString("nombre");
 				String precio = Integer.toString(result.getInt("precio"));
 				String estrellas = Integer.toString(result.getInt("estrellas"));
@@ -83,56 +100,99 @@ public class GestorBD {
 
 			}
 
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 		return hoteles;
 	}
 
-	public static void insertarReserva(ArrayList<String> reserva) throws Exception {
-		try {
-			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida) values ('"
-					+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
-					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','"
-					+ reserva.get(6) + "')";
+	public static void insertarReserva(ArrayList<String> reserva) throws Exception 
+	{
+		try 
+		{	
+			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida,DniUsuario,Usuario)"
+					+ " values ('"+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
+					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','" + reserva.get(6) + 
+					"','" + reserva.get(7) + "','" + reserva.get(8) + "')";
+			
 			statement = conexion.createStatement();
 
 			preparedstatement = conexion.prepareStatement(sentencia);
 			preparedstatement.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Datos correctamente ingresados");
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error al enviar a informacion a la Base de Datos");
 		}
 	}
 
-	public static ResultSet consulta(String sentencia) {
+	public static ResultSet consulta(String sentencia) 
+	{
 
-		try {
+		try 
+		{
 			preparedstatement = conexion.prepareStatement(sentencia);
 			result = preparedstatement.executeQuery();
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
 		}
 		return result;
 	}
 
-	public static boolean insertarDatos(String sentencia) {
-		try {
+	public static boolean insertarDatos(String sentencia) 
+	{
+		try 
+		{
 			statement = conexion.createStatement();
 			statement.executeUpdate(sentencia);
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
 			return false;
 		}
 		return true;
 	}
+	
+	public static String conseguir_nombre_apellidos(String DNI) 
+	{
+	    CallableStatement call_procedure = null;
+	    String nomape = "";
+	    try 
+	    {
+	          call_procedure = conexion.prepareCall("{call conseguir_nombre_apellidos(?)}");
+	          call_procedure.setString(1,DNI);
+	          
+		      result = call_procedure.executeQuery();
+	
+		      while (result.next()) 
+		      {
+		    	  nomape = result.getString("NomApe");
+		      }
+	      
 
-	public static boolean isDbConnected() {
+	    } 
+	    catch (SQLException e) 
+	    {
+	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
+	    } 
+	    
+	    return nomape;
+	 }	
+
+	public static boolean isDbConnected() 
+	{
 		final String CHECK_SQL_QUERY = "SELECT 1";
 		boolean isConnected = false;
-		try {
+		try 
+		{
 			final PreparedStatement statement = GestorBD.getConexion().prepareStatement(CHECK_SQL_QUERY);
 			result = statement.executeQuery();
 			String cadena = "";
@@ -140,8 +200,10 @@ public class GestorBD {
 				cadena = result.getString(1);
 			if (cadena.equals("1"))
 				isConnected = true;
-		} catch (SQLException | NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos...");
+		}
+		catch (SQLException | NullPointerException e) 
+		{
+			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos.");
 		}
 		return isConnected;
 	}
