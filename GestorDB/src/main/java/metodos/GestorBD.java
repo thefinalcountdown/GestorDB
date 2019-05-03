@@ -23,7 +23,7 @@ public class GestorBD {
 
 	public GestorBD() {
 
-		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/bidaion?serverTimezone=UTC";
+		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/bidaion_prueba?serverTimezone=UTC";
 		
 		try 
 		{
@@ -112,10 +112,10 @@ public class GestorBD {
 	{
 		try 
 		{	
-			String sentencia = "insert into Reserva(NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida,DniUsuario,Usuario)"
-					+ " values ('"+ reserva.get(0) + "'," + Float.parseFloat(reserva.get(1)) + "," + Integer.parseInt(reserva.get(2))
-					+ "," + Integer.parseInt(reserva.get(3)) + ",'" + reserva.get(4) + "','" + reserva.get(5) + "','" + reserva.get(6) + 
-					"','" + reserva.get(7) + "','" + reserva.get(8) + "')";
+			String sentencia = "insert into Reserva(Cod_Alojamiento,NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida,DniUsuario,Usuario)"
+					+ " values ("+ Integer.parseInt(reserva.get(0)) + ",'"+ reserva.get(1) + "'," + Float.parseFloat(reserva.get(2)) + "," + Integer.parseInt(reserva.get(3))
+					+ "," + Integer.parseInt(reserva.get(4)) + ",'" + reserva.get(5) + "','" + reserva.get(6) + "','" + reserva.get(7) + 
+					"','" + reserva.get(8) + "','" + reserva.get(9) + "')";
 			
 			statement = conexion.createStatement();
 
@@ -141,7 +141,7 @@ public class GestorBD {
 		}
 		catch (Exception e) 
 		{
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos1");
 		}
 		return result;
 	}
@@ -155,7 +155,7 @@ public class GestorBD {
 		}
 		catch (Exception e) 
 		{
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos2");
 			return false;
 		}
 		return true;
@@ -181,7 +181,7 @@ public class GestorBD {
 	    } 
 	    catch (SQLException e) 
 	    {
-	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
+	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos3");
 	    } 
 	    
 	    return nomape;
@@ -203,7 +203,7 @@ public class GestorBD {
 		}
 		catch (SQLException | NullPointerException e) 
 		{
-			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos.");
+			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos4.");
 		}
 		return isConnected;
 	}
