@@ -108,29 +108,6 @@ public class GestorBD {
 		return hoteles;
 	}
 
-	public static void insertarReserva(ArrayList<String> reserva) throws Exception 
-	{
-		try 
-		{	
-			String sentencia = "insert into Reserva(Cod_Alojamiento,NombreAlojamiento,Precio,NumPersonas,NumHabitaciones,Ubicacion,FechaEntrada,FechaSalida,DniUsuario,Usuario)"
-					+ " values ("+ Integer.parseInt(reserva.get(0)) + ",'"+ reserva.get(1) + "'," + Float.parseFloat(reserva.get(2)) + "," + Integer.parseInt(reserva.get(3))
-					+ "," + Integer.parseInt(reserva.get(4)) + ",'" + reserva.get(5) + "','" + reserva.get(6) + "','" + reserva.get(7) + 
-					"','" + reserva.get(8) + "','" + reserva.get(9) + "')";
-			
-			statement = conexion.createStatement();
-
-			preparedstatement = conexion.prepareStatement(sentencia);
-			preparedstatement.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "Datos correctamente ingresados");
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Error al enviar a informacion a la Base de Datos");
-		}
-	}
-
 	public static ResultSet consulta(String sentencia) 
 	{
 
@@ -141,7 +118,7 @@ public class GestorBD {
 		}
 		catch (Exception e) 
 		{
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos1");
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos.");
 		}
 		return result;
 	}
@@ -155,7 +132,7 @@ public class GestorBD {
 		}
 		catch (Exception e) 
 		{
-			JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos2");
+			JOptionPane.showMessageDialog(null, "No se pudo insertar los datos.");
 			return false;
 		}
 		return true;
@@ -181,7 +158,7 @@ public class GestorBD {
 	    } 
 	    catch (SQLException e) 
 	    {
-	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos3");
+	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
 	    } 
 	    
 	    return nomape;
@@ -203,7 +180,7 @@ public class GestorBD {
 		}
 		catch (SQLException | NullPointerException e) 
 		{
-			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos4.");
+			JOptionPane.showMessageDialog(null, "Se ha perdido la conexion a la base de datos.");
 		}
 		return isConnected;
 	}
