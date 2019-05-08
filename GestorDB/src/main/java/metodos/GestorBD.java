@@ -157,12 +157,10 @@ public class GestorBD {
 		      {
 		    	  nomape = result.getString("NomApe");
 		      }
-	      
-
 	    } 
 	    catch (SQLException e) 
 	    {
-	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos");
+	    	JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta a la base de datos.");
 	    	System.exit(0);
 	    } 
 	    
