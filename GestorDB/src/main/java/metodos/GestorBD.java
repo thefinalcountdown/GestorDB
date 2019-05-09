@@ -1,5 +1,7 @@
 package metodos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class GestorBD {
 	private String maquina = "localhost";
@@ -47,10 +52,30 @@ public class GestorBD {
 			System.exit(0);
 		}
 		
-		JOptionPane.showMessageDialog(null, "Conectando a la base de datos.");
-		// System.out.println("Conectando a la base de datos...");
+		conectando();
+		
 	}
 
+	public static JOptionPane conectando() {
+		JOptionPane miPanel = new JOptionPane("Conectando a la Base de datos.");
+        final JDialog dialog = miPanel.createDialog(null, "Conectando");//aqui uso un JDialog para manipular
+        																					//el JOptionPane
+        dialog.setModal(true);  
+        //Usando javax.swing.Timer para poder generar un evento en un tiempo determinado
+        Timer timer = new Timer(1 * 1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();				
+			}		
+        });
+        		
+        timer.start();
+        dialog.setVisible(true);
+        timer.stop();
+        
+        return miPanel;
+	}
+	
 	public static Connection getConexion() 
 	{
 		return conexion;
