@@ -28,7 +28,7 @@ public class GestorBD {
 
 	public GestorBD() {
 
-		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/bidaion_prueba?serverTimezone=UTC";
+		servidor = "jdbc:mysql://" + maquina + ":" + puerto + "/'bidaion-tablas'?serverTimezone=UTC";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
