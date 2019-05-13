@@ -112,10 +112,9 @@ DROP TABLE IF EXISTS `'bidaion-tablas'`.`Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Usuario` (
   `DNI` CHAR(9) CHARACTER SET 'utf8' NOT NULL,
-  `Nombre` VARCHAR(50) NOT NULL,
-  `Apellido` VARCHAR(50) NOT NULL,
-  `Clave` VARCHAR(50) NOT NULL,
-  `Fecha_Registro` DATE,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Clave` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`DNI`, `Nombre`))
 ENGINE = InnoDB;
 
