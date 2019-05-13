@@ -93,6 +93,19 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Camas` (
 );
 
 -- -----------------------------------------------------
+-- Table `'bidaion-tablas'`.`Fechas`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `'bidaion-tablas'`.`Fechas` ;
+
+CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Fechas` (
+`Codigo_fecha` varchar(20) NOT NULL,
+`Fecha_inicio` DATE,
+`Fecha_fin` DATE,
+`Descuento` INT,
+PRIMARY KEY(`Codigo_fecha`)  
+);
+
+-- -----------------------------------------------------
 -- Table `'bidaion-tablas'`.`Usuario`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `'bidaion-tablas'`.`Usuario` ;
@@ -106,6 +119,20 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Usuario` (
 ENGINE = InnoDB;
 
 CREATE INDEX `index2` ON `'bidaion-tablas'`.`Usuario` (`Nombre` ASC) VISIBLE;
+
+-- -----------------------------------------------------
+-- Table `'bidaion-tablas'.`Promocion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `'bidaion-tablas'`.`Promocion`;
+
+CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Promocion` (
+	`Cod_Promocion` VARCHAR(20) NOT NULL,
+    `Cod_Alojamiento` INT,
+    `Descuento` INT,
+    PRIMARY KEY (`Cod_Promocion`),
+    CONSTRAINT `fk_alojpromo`
+    FOREIGN KEY (`Cod_Alojamiento`) REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`));
+
 
 
 -- -----------------------------------------------------
@@ -865,6 +892,84 @@ INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES (
 INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C95', '1');
 INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C42', '1');
 
+-- -----------------------------------------------------------------
+-- Data for table `'bidaion-tablas'`.`Promocion`
+-- -----------------------------------------------------------------
+
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('golf', 52, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('riaza', 44, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('solana', 28, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('waterfall', 36, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sol', 20, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisalicante', 5, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('suitopia', 10, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('aldapa', 53, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('briviesca', 45, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lasaileku', 29, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('marmitako', 37, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlton', 23, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('domine', 25, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ercilla', 24, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisbilbao', 22, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('pitu', 46, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('francisco', 54, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('olmo', 30, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('satzu', 38, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('campaniola', 21, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlosi', 11, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('laurel', 56, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('rinxto', 48, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('baolafuente', 32, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('piolin', 40, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('acevi', 16, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mimosa', 9, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('barcelona', 7, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bonito', 49, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('memk', 57, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('millan', 41, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('uleta', 33, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismadrid', 2, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('paquita', 15, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lagasca', 12, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('casalareina', 51, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('catedral', 43, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mercado', 35, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('cuevas', 27, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bahia', 17, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('hotelcuevas', 8, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibissantander', 4, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('petit', 18, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lardviura', 50, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('miraflores', 42, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('covaleda', 34, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sanroque', 26, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ronda', 1, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('eliseos', 19, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismalaga', 3, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bellaeaso', 55, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('tiaupe', 47, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('berceo', 31, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('renieblas', 39, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisgranada', 6, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('leonardo', 14, 5);
+INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('palacio', 13, 5);
+
+-- -----------------------------------------------------------------
+-- Data for table `'bidaion-tablas'`.`Fechas`
+-- -----------------------------------------------------------------
+
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('TemporadaEstival', '2019/06/01', '2019/08/30', '0.20');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`) VALUES ('FueraTemporada', '2019/09/01', '2020/05/31');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero1', '2020/01/01', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero6', '2020/01/06', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril19', '2020/04/19', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril21', '2020/04/21', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Mayo1', '2020/05/01', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Octubre12', '2020/10/12', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2020/11/01', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2020/12/06', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2020/12/08', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2020/12/25', '0.10');
 
 
 DROP PROCEDURE IF EXISTS conseguir_nombre_apellidos;
