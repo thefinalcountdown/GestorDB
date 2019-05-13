@@ -998,8 +998,10 @@ drop view if exists vista_casa;
 
 CREATE VIEW 
 vista_casa AS 
-SELECT Casa_apartamento.*, SUM(Precio) AS 
-Precio_casa FROM Habitacion inner join Casa_apartamento 
+SELECT Casa_apartamento.*, 
+SUM(Precio) AS Precio_casa,
+SUM(Superficie) AS Superficie_casa 
+FROM Habitacion inner join Casa_apartamento 
 on Habitacion.Cod_Alojamiento = Casa_apartamento.Cod_Casa
 WHERE Cod_Habitacion LIKE 'A%' || Cod_Habitacion LIKE 'C%' GROUP BY Cod_Alojamiento;
 
