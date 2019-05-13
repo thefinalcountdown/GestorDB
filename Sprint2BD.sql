@@ -167,12 +167,7 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_4hotelcod`
     FOREIGN KEY (`Cod_Alojamiento`)
-    REFERENCES `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_5casacod`
-    FOREIGN KEY (`Cod_Alojamiento`)
-    REFERENCES `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`)
+    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
