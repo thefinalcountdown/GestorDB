@@ -171,13 +171,13 @@ CREATE INDEX `fk_4hotelcod` ON `'bidaion-tablas'`.`Reserva` (`Cod_Alojamiento` A
 DROP TABLE IF EXISTS `'bidaion-tablas'`.`Reserva_Habitacion` ;
 
 CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva_Habitacion` (
-  `Habitacion_Alojamiento_Num_Habitacion` INT NOT NULL,
+  `Habitacion_Alojamiento_Num_Habitacion` varchar(20) NOT NULL,
   `FechaEntrada` DATE NOT NULL,
   `FechaSalida` DATE NOT NULL,
   PRIMARY KEY (`Habitacion_Alojamiento_Num_Habitacion`),
   CONSTRAINT `fk_Reserva_has_Habitacion_Alojamiento_Habitacion_Alojamiento1`
     FOREIGN KEY (`Habitacion_Alojamiento_Num_Habitacion`)
-    REFERENCES `'bidaion-tablas'`.`Habitacion_Alojamiento` (`Num_Habitacion`)
+    REFERENCES `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_2fechas`
@@ -318,6 +318,22 @@ INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Pis
 INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('48', '1', '5');
 INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('47', '2', '4');
 INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('42', '2', '6');
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('26', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('27', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('28', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('29', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('30', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('31', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('32', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('33', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('34', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('35', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('36', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('37', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('38', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('39', '1', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('40', '2', null);
+INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('41', '2', null);
 
 -- -----------------------------------------------------------------
 -- Data for table `'bidaion-tablas'`.`Habitacion`
@@ -872,3 +888,6 @@ BEGIN
     close nombre_apellidos;
     select NomApe;
 END$$
+
+
+
