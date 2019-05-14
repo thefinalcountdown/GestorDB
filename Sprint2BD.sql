@@ -156,10 +156,6 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva` (
   CONSTRAINT `fk_1_alojamientoReserva`
     FOREIGN KEY (`NombreAlojamiento` , `Ubicacion`)
     REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Nombre` , `Ubicacion`),
-    FOREIGN KEY (`Precio`)
-    REFERENCES `'bidaion-tablas'`.`Habitacion` (`Precio`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_3usuarioareserva`
     FOREIGN KEY (`Usuario_DNI` , `Usuario`)
     REFERENCES `'bidaion-tablas'`.`Usuario` (`DNI` , `Nombre`)
