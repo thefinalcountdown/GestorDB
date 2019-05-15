@@ -93,19 +93,6 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Camas` (
 );
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Fechas`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Fechas` ;
-
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Fechas` (
-`Codigo_fecha` varchar(20) NOT NULL,
-`Fecha_inicio` DATE,
-`Fecha_fin` DATE,
-`Descuento` FLOAT,
-PRIMARY KEY(`Codigo_fecha`)  
-);
-
--- -----------------------------------------------------
 -- Table `'bidaion-tablas'`.`Usuario`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `'bidaion-tablas'`.`Usuario` ;
@@ -116,10 +103,11 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Usuario` (
   `Apellido` VARCHAR(45) NOT NULL,
   `Clave` VARCHAR(45) NOT NULL,
   `Fecha_Registro` DATE,
-  PRIMARY KEY (`DNI`, `Nombre`))
+  `Fecha_Modificacion` DATE,
+  PRIMARY KEY (`DNI`))
 ENGINE = InnoDB;
 
-CREATE INDEX `index2` ON `'bidaion-tablas'`.`Usuario` (`Nombre` ASC) VISIBLE;
+-- CREATE INDEX `index2` ON `'bidaion-tablas'`.`Usuario` (`Nombre` ASC) VISIBLE;
 
 -- -----------------------------------------------------
 -- Table `'bidaion-tablas'.`Promocion`
@@ -158,8 +146,8 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva` (
     FOREIGN KEY (`NombreAlojamiento` , `Ubicacion`)
     REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Nombre` , `Ubicacion`),
   CONSTRAINT `fk_3usuarioareserva`
-    FOREIGN KEY (`Usuario_DNI` , `Usuario`)
-    REFERENCES `'bidaion-tablas'`.`Usuario` (`DNI` , `Nombre`)
+    FOREIGN KEY (`Usuario_DNI`)
+    REFERENCES `'bidaion-tablas'`.`Usuario` (`DNI`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_4hotelcod`
@@ -183,6 +171,19 @@ CREATE INDEX `fk_3usuarioareserva` ON `'bidaion-tablas'`.`Reserva` (`Usuario_DNI
 
 CREATE INDEX `fk_4hotelcod` ON `'bidaion-tablas'`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
 
+
+-- -----------------------------------------------------
+-- Table `'bidaion-tablas'`.`Fechas`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `'bidaion-tablas'`.`Fechas` ;
+
+CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Fechas` (
+`Codigo_fecha` varchar(20) NOT NULL,
+`Fecha_inicio` DATE,
+`Fecha_fin` DATE,
+`Descuento` FLOAT,
+PRIMARY KEY(`Codigo_fecha`)
+);
 
 -- -----------------------------------------------------
 -- Table `'bidaion-tablas'`.`Reserva_Habitacion`
