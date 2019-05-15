@@ -997,3 +997,16 @@ FROM Habitacion inner join Casa_apartamento
 on Habitacion.Cod_Alojamiento = Casa_apartamento.Cod_Casa
 WHERE Cod_Habitacion LIKE 'A%' || Cod_Habitacion LIKE 'C%' GROUP BY Cod_Alojamiento;
 
+
+-- CREACION DE USUARIOS 
+
+
+CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'hola';
+CREATE USER 'ver'@'localhost' IDENTIFIED BY 'hola1';
+CREATE USER 'editar'@'localhost' IDENTIFIED BY 'hola2';
+
+-- DAR PRIVILEGIOS
+GRANT ALL PRIVILEGES ON `'bidaion-tablas'`.* to 'administrador'@'localhost';
+GRANT SELECT ON `'bidaion-tablas'`.* to 'ver'@'localhost';
+GRANT INSERT, SELECT, UPDATE ON `'bidaion-tablas'`.* to 'editar'@'localhost';
+
