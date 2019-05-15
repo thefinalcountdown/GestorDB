@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Fechas` (
 `Codigo_fecha` varchar(20) NOT NULL,
 `Fecha_inicio` DATE,
 `Fecha_fin` DATE,
-`Descuento` INT,
+`Descuento` FLOAT,
 PRIMARY KEY(`Codigo_fecha`)  
 );
 
@@ -950,17 +950,17 @@ INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`D
 -- -----------------------------------------------------------------
 
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('TemporadaEstival', '2019/06/01', '2019/08/30', '0.20');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`) VALUES ('FueraTemporada', '2019/09/01', '2020/05/31');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('FueraTemporada', '2019/09/01', '2020/05/31', '0.0');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero1', '2020/01/01', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero6', '2020/01/06', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril19', '2020/04/19', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril21', '2020/04/21', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Mayo1', '2020/05/01', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Octubre12', '2020/10/12', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2020/11/01', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2020/12/06', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2020/12/08', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2020/12/25', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Octubre12', '2019/10/12', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2019/11/01', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2019/12/06', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2019/12/08', '0.10');
+INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
 
 
 DROP PROCEDURE IF EXISTS conseguir_nombre_apellidos;
