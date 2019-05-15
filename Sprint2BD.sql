@@ -171,6 +171,21 @@ CREATE INDEX `fk_3usuarioareserva` ON `'bidaion-tablas'`.`Reserva` (`Usuario_DNI
 
 CREATE INDEX `fk_4hotelcod` ON `'bidaion-tablas'`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
 
+-- -----------------------------------------------------
+-- Table `'bidaion-tablas'`.`Direccion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `'bidaion-tablas'`.`Direccion` ;
+
+CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Direccion` (
+`Codigo_Direccion` INT NOT NULL AUTO_INCREMENT,
+`Calle` varchar(30),
+`Numero` INT,
+`CodigoPostal` INT,
+`Cod_Alojamiento` INT,
+PRIMARY KEY (`Codigo_Direccion`),
+FOREIGN KEY (`Cod_Alojamiento`)
+    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`)
+);
 
 -- -----------------------------------------------------
 -- Table `'bidaion-tablas'`.`Fechas`
@@ -963,6 +978,68 @@ INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descue
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2019/12/06', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2019/12/08', '0.10');
 INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
+
+-- -----------------------------------------------------------------
+-- Data for table `'bidaion-tablas'`.`Direccion`
+-- -----------------------------------------------------------------
+
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle1', '4', '48015', '1');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle2', '5', '40433', '2');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle5', '12', '33012', '3');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle4', '24', '24962', '4');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle5', '3', '13573', '5');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle6', '1', '23754', '6');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle7', '54', '98635', '7');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle8', '2', '65372', '8');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle9', '7', '32156', '9');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle10', '14', '48630', '10');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle11', '18', '38562', '11');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle12', '20', '59715', '12');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle13', '5', '12345', '13');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle14', '7', '34567', '14');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle15', '16', '34567', '15');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle16', '12', '67890', '16');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle17', '18', '13579', '17');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle18', '24', '24680', '18');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle19', '27', '34126', '19');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle20', '15', '36453', '20');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle21', '19', '27564', '21');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle22', '27', '23643', '22');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle23', '22', '34674', '23');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle24', '12', '35753', '24');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle25', '11', '23687', '25');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle26', '24', '35876', '26');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle27', '23', '32687', '27');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle28', '25', '86543', '28');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle29', '2', '76543', '29');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle30', '5', '45678', '30');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle31', '6', '43567', '31');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle32', '7', '54347', '32');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle34', '8', '86476', '33');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle35', '9', '64378', '34');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle36', '17', '78585', '35');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle37', '10', '76543', '36');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle38', '20', '45678', '37');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle39', '21', '87654', '38');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle40', '27', '98764', '39');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle41', '4', '23456', '40');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle42', '19', '12356', '41');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle43', '23', '76589', '42');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle44', '25', '34526', '43');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle45', '27', '87635', '44');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle46', '1', '98635', '45');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle47', '15', '65758', '46');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle48', '6', '87964', '47');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle49', '8', '46372', '48');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle50', '9', '35261', '49');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle51', '11', '47532', '50');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle52', '30', '68594', '51');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle53', '31', '35267', '52');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle54', '33', '15789', '53');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle55', '38', '34687', '54');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle56', '7', '34653', '55');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle57', '16', '56987', '56');
+INSERT INTO `'bidaion-tablas'`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle58', '36', '12435', '57');
 
 
 DROP PROCEDURE IF EXISTS conseguir_nombre_apellidos;
