@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Fechas` (
 `Descuento` FLOAT,
 PRIMARY KEY(`Codigo_fecha`)  
 );
-
+select * from Usuario;
 -- -----------------------------------------------------
 -- Table `bidaion_tablas`.`Usuario`
 -- -----------------------------------------------------
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Usuario` (
   `Apellido` VARCHAR(45) NOT NULL,
   `Clave` VARCHAR(45) NOT NULL,
   `Fecha_Registro` DATETIME,
-  `Fecha_Modificacion` DATE,
+  `Fecha_Modificacion` DATETIME,
   PRIMARY KEY (`DNI`))
 ENGINE = InnoDB;
 
