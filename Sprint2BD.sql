@@ -1111,16 +1111,16 @@ set  NEW.Fecha_Modificacion=NOW();
 END $$
 
 -- CREACION DE USUARIOS 
+-- LO DEJO COMENTADO PARA QUE NO DE ERRORES PORQUE YA ESTAN CREADOS
 
+-- CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'hola';
+-- CREATE USER 'ver'@'localhost' IDENTIFIED BY 'hola1';
+-- CREATE USER 'editar'@'localhost' IDENTIFIED BY 'hola2';
 
-CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'hola';
-CREATE USER 'ver'@'localhost' IDENTIFIED BY 'hola1';
-CREATE USER 'editar'@'localhost' IDENTIFIED BY 'hola2';
-
--- DAR PRIVILEGIOS
-GRANT ALL PRIVILEGES ON bidaion_tablas.* to 'administrador'@'localhost';
-GRANT SELECT ON bidaion_tablas.* to 'ver'@'localhost';
-GRANT INSERT, SELECT, UPDATE ON bidaion_tablas.* to 'editar'@'localhost';
+-- -- DAR PRIVILEGIOS
+-- GRANT ALL PRIVILEGES ON bidaion_tablas.* to 'administrador'@'localhost';
+-- GRANT SELECT ON bidaion_tablas.* to 'ver'@'localhost';
+-- GRANT INSERT, SELECT, UPDATE ON bidaion_tablas.* to 'editar'@'localhost';
 
 
 
