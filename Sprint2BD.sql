@@ -1112,6 +1112,9 @@ END $$
 
 -- CREACION DE USUARIOS 
 
+drop user if exists 'administrador'@'localhost';
+drop user if exists 'ver'@'localhost';
+drop user if exists 'editar'@'localhost';
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'hola';
 CREATE USER 'ver'@'localhost' IDENTIFIED BY 'hola1';
