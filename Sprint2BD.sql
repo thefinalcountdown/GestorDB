@@ -991,7 +991,7 @@ INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuent
 INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2019/11/01', '0.10');
 INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2019/12/06', '0.10');
 INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2019/12/08', '0.10');
-INSERT INTO `bidaion_taƒblas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
 
 
 -- -----------------------------------------------------------------
