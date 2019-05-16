@@ -104,7 +104,8 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Fechas` (
 `Descuento` FLOAT,
 PRIMARY KEY(`Codigo_fecha`)  
 );
-select * from Usuario;
+
+
 -- -----------------------------------------------------
 -- Table `bidaion_tablas`.`Usuario`
 -- -----------------------------------------------------
