@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Usuario` (
   PRIMARY KEY (`DNI`))
 ENGINE = InnoDB;
 
-CREATE INDEX `index2` ON `bidaion_tablas`.`Usuario` (`DNI` ASC) VISIBLE;
+-- CREATE INDEX `index2` ON `bidaion_tablas`.`Usuario` (`Nombre` ASC) VISIBLE;
 
 -- -----------------------------------------------------
 -- Table `bidaion_tablas.`Promocion`
@@ -129,13 +129,12 @@ CREATE INDEX `index2` ON `bidaion_tablas`.`Usuario` (`DNI` ASC) VISIBLE;
 DROP TABLE IF EXISTS `bidaion_tablas`.`Promocion`;
 
 CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Promocion` (
-	`Cod_Promocion` VARCHAR(45) NOT NULL,
-    `Cod_Cliente` CHAR(9) CHARACTER SET 'utf8' NOT NULL,
+	`Cod_Promocion` VARCHAR(20) NOT NULL,
+    `Cod_Alojamiento` INT,
     `Descuento` INT,
-    `Fecha_uso` DATE,
     PRIMARY KEY (`Cod_Promocion`),
-    CONSTRAINT `fk_index2`
-    FOREIGN KEY (`Cod_Cliente`) REFERENCES `bidaion_tablas`.`Usuario` (`DNI`));
+    CONSTRAINT `fk_alojpromo`
+    FOREIGN KEY (`Cod_Alojamiento`) REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`));
 
 
 
@@ -1110,18 +1109,6 @@ before UPDATE ON `Usuario`
 FOR EACH ROW BEGIN
 set  NEW.Fecha_Modificacion=NOW();
 END $$
-
-
-
-DROP TRIGGER IF EXISTS cod_promo;
-DELIMITER $$
-CREATE TRIGGER cod_promo
-after insert on `Usuario`
-for each row begin 
-insert into `Promocion`
-values (NEW.Nombre, NEW.DNI,5);
-END $$
-
 
 -- CREACION DE USUARIOS 
 
