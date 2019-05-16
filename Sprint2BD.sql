@@ -8,61 +8,61 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema 'bidaion-tablas'
+-- Schema bidaion_tablas
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `'bidaion-tablas'` ;
+DROP SCHEMA IF EXISTS `bidaion_tablas` ;
 
 -- -----------------------------------------------------
--- Schema 'bidaion-tablas'
+-- Schema bidaion_tablas
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `'bidaion-tablas'` DEFAULT CHARACTER SET utf8 ;
-USE `'bidaion-tablas'` ;
+CREATE SCHEMA IF NOT EXISTS `bidaion_tablas` DEFAULT CHARACTER SET utf8 ;
+USE `bidaion_tablas` ;
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Alojamiento`
+-- Table `bidaion_tablas`.`Alojamiento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Alojamiento` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Alojamiento` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Alojamiento` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Alojamiento` (
 	`Cod_Alojamiento` INT NOT NULL AUTO_INCREMENT,
     `Nombre` VARCHAR(45) NOT NULL,
     `Ubicacion` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`Cod_Alojamiento`)
 );
-CREATE INDEX `index1` ON `'bidaion-tablas'`.`Alojamiento` (`Nombre` ASC, `Ubicacion` ASC) VISIBLE;
+CREATE INDEX `index1` ON `bidaion_tablas`.`Alojamiento` (`Nombre` ASC, `Ubicacion` ASC) VISIBLE;
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Hotel`
+-- Table `bidaion_tablas`.`Hotel`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Hotel` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Hotel` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Hotel` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Hotel` (
   `Cod_Hotel` INT NOT NULL,
   `Estrellas` INT NOT NULL,
   PRIMARY KEY (`Cod_Hotel`),
   CONSTRAINT `fk_ho`
     FOREIGN KEY (`Cod_Hotel`)
-    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`));
+    REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`));
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Casa_apartamento`
+-- Table `bidaion_tablas`.`Casa_apartamento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Casa_apartamento` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Casa_apartamento` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Casa_apartamento` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Casa_apartamento` (
   `Cod_Casa` INT NOT NULL AUTO_INCREMENT,
   `Num_banos` INT NOT NULL,
   `Piso` INT NULL,
   PRIMARY KEY (`Cod_Casa`),
   CONSTRAINT `fk_c`
     FOREIGN KEY (`Cod_Casa`)
-    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`));
+    REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`));
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'.`Habitacion`
+-- Table `bidaion_tablas.`Habitacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Habitacion` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Habitacion` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Habitacion` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Habitacion` (
 	`Cod_Habitacion` VARCHAR(20) NOT NULL,
 	`Superficie` FLOAT NOT NULL,
 	`Tipo_habitacion` ENUM ('cocina','balcon','dormitorio','comedor','garaje','sala','baño'),
@@ -72,16 +72,16 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Habitacion` (
 	PRIMARY KEY (`Cod_habitacion`),
 	CONSTRAINT `fk_ha`
 		FOREIGN KEY (`Cod_Alojamiento`)
-		REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`)
+		REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`)
 );
-CREATE INDEX `index2` ON `'bidaion-tablas'`.`Habitacion` (`Precio` ASC) VISIBLE;
+CREATE INDEX `index2` ON `bidaion_tablas`.`Habitacion` (`Precio` ASC) VISIBLE;
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Camas`
+-- Table `bidaion_tablas`.`Camas`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Camas` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Camas` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Camas` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Camas` (
 	`Cod_Habitacion` VARCHAR(20) NOT NULL,
     `Individual` int,
     `Infantil` int,
@@ -89,15 +89,15 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Camas` (
     PRIMARY KEY (`Cod_Habitacion`),
     CONSTRAINT `fk_ca`
 		FOREIGN KEY (`Cod_Habitacion`)
-		REFERENCES `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`)
+		REFERENCES `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`)
 );
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Fechas`
+-- Table `bidaion_tablas`.`Fechas`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Fechas` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Fechas` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Fechas` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Fechas` (
 `Codigo_fecha` varchar(20) NOT NULL,
 `Fecha_inicio` DATE,
 `Fecha_fin` DATE,
@@ -106,11 +106,11 @@ PRIMARY KEY(`Codigo_fecha`)
 );
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Usuario`
+-- Table `bidaion_tablas`.`Usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Usuario` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Usuario` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Usuario` (
   `DNI` CHAR(9) CHARACTER SET 'utf8' NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Apellido` VARCHAR(45) NOT NULL,
@@ -119,29 +119,29 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Usuario` (
   PRIMARY KEY (`DNI`, `Nombre`))
 ENGINE = InnoDB;
 
-CREATE INDEX `index2` ON `'bidaion-tablas'`.`Usuario` (`Nombre` ASC) VISIBLE;
+CREATE INDEX `index2` ON `bidaion_tablas`.`Usuario` (`Nombre` ASC) VISIBLE;
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'.`Promocion`
+-- Table `bidaion_tablas.`Promocion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Promocion`;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Promocion`;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Promocion` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Promocion` (
 	`Cod_Promocion` VARCHAR(20) NOT NULL,
     `Cod_Alojamiento` INT,
     `Descuento` INT,
     PRIMARY KEY (`Cod_Promocion`),
     CONSTRAINT `fk_alojpromo`
-    FOREIGN KEY (`Cod_Alojamiento`) REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`));
+    FOREIGN KEY (`Cod_Alojamiento`) REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`));
 
 
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Reserva`
+-- Table `bidaion_tablas`.`Reserva`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Reserva` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Reserva` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Reserva` (
   `Cod_reserva` INT NOT NULL AUTO_INCREMENT,
   `Cod_Alojamiento` INT NOT NULL,
   `FechaEntrada` DATE NOT NULL,
@@ -156,61 +156,61 @@ CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva` (
   PRIMARY KEY (`Cod_reserva`),
   CONSTRAINT `fk_1_alojamientoReserva`
     FOREIGN KEY (`NombreAlojamiento` , `Ubicacion`)
-    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Nombre` , `Ubicacion`),
+    REFERENCES `bidaion_tablas`.`Alojamiento` (`Nombre` , `Ubicacion`),
   CONSTRAINT `fk_3usuarioareserva`
     FOREIGN KEY (`Usuario_DNI` , `Usuario`)
-    REFERENCES `'bidaion-tablas'`.`Usuario` (`DNI` , `Nombre`)
+    REFERENCES `bidaion_tablas`.`Usuario` (`DNI` , `Nombre`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_4hotelcod`
     FOREIGN KEY (`Cod_Alojamiento`)
-    REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`)
+    REFERENCES `bidaion_tablas`.`Alojamiento` (`Cod_Alojamiento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `index2` ON `'bidaion-tablas'`.`Reserva` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
+CREATE INDEX `index2` ON `bidaion_tablas`.`Reserva` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
 
-CREATE INDEX `fk_1_idx` ON `'bidaion-tablas'`.`Reserva` (`NombreAlojamiento` ASC, `Ubicacion` ASC, `Precio` ASC) VISIBLE;
+CREATE INDEX `fk_1_idx` ON `bidaion_tablas`.`Reserva` (`NombreAlojamiento` ASC, `Ubicacion` ASC, `Precio` ASC) VISIBLE;
 
-CREATE INDEX `fk_2_idx` ON `'bidaion-tablas'`.`Reserva` (`Usuario_DNI` ASC, `Usuario` ASC) VISIBLE;
+CREATE INDEX `fk_2_idx` ON `bidaion_tablas`.`Reserva` (`Usuario_DNI` ASC, `Usuario` ASC) VISIBLE;
 
-CREATE INDEX `fk_5_idx` ON `'bidaion-tablas'`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
+CREATE INDEX `fk_5_idx` ON `bidaion_tablas`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
 
-CREATE INDEX `fk_1_hotelareserva` ON `'bidaion-tablas'`.`Reserva` (`NombreAlojamiento` ASC, `Ubicacion` ASC, `Precio` ASC) VISIBLE;
+CREATE INDEX `fk_1_hotelareserva` ON `bidaion_tablas`.`Reserva` (`NombreAlojamiento` ASC, `Ubicacion` ASC, `Precio` ASC) VISIBLE;
 
-CREATE INDEX `fk_3usuarioareserva` ON `'bidaion-tablas'`.`Reserva` (`Usuario_DNI` ASC, `Usuario` ASC) VISIBLE;
+CREATE INDEX `fk_3usuarioareserva` ON `bidaion_tablas`.`Reserva` (`Usuario_DNI` ASC, `Usuario` ASC) VISIBLE;
 
-CREATE INDEX `fk_4hotelcod` ON `'bidaion-tablas'`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
+CREATE INDEX `fk_4hotelcod` ON `bidaion_tablas`.`Reserva` (`Cod_Alojamiento` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `'bidaion-tablas'`.`Reserva_Habitacion`
+-- Table `bidaion_tablas`.`Reserva_Habitacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `'bidaion-tablas'`.`Reserva_Habitacion` ;
+DROP TABLE IF EXISTS `bidaion_tablas`.`Reserva_Habitacion` ;
 
-CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Reserva_Habitacion` (
+CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Reserva_Habitacion` (
   `Habitacion_Alojamiento_Num_Habitacion` varchar(20) NOT NULL,
   `FechaEntrada` DATE NOT NULL,
   `FechaSalida` DATE NOT NULL,
   PRIMARY KEY (`Habitacion_Alojamiento_Num_Habitacion`),
   CONSTRAINT `fk_Reserva_has_Habitacion_Alojamiento_Habitacion_Alojamiento1`
     FOREIGN KEY (`Habitacion_Alojamiento_Num_Habitacion`)
-    REFERENCES `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`)
+    REFERENCES `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_2fechas`
     FOREIGN KEY (`FechaEntrada` , `FechaSalida`)
-    REFERENCES `'bidaion-tablas'`.`Reserva` (`FechaEntrada` , `FechaSalida`)
+    REFERENCES `bidaion_tablas`.`Reserva` (`FechaEntrada` , `FechaSalida`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Reserva_has_Habitacion_Alojamiento_Habitacion_Alojamient_idx` ON `'bidaion-tablas'`.`Reserva_Habitacion` (`Habitacion_Alojamiento_Num_Habitacion` ASC) VISIBLE;
+CREATE INDEX `fk_Reserva_has_Habitacion_Alojamiento_Habitacion_Alojamient_idx` ON `bidaion_tablas`.`Reserva_Habitacion` (`Habitacion_Alojamiento_Num_Habitacion` ASC) VISIBLE;
 
-CREATE INDEX `fk_2_idx` ON `'bidaion-tablas'`.`Reserva_Habitacion` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
+CREATE INDEX `fk_2_idx` ON `bidaion_tablas`.`Reserva_Habitacion` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
 
-CREATE INDEX `fk_2fechas` ON `'bidaion-tablas'`.`Reserva_Habitacion` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
+CREATE INDEX `fk_2fechas` ON `bidaion_tablas`.`Reserva_Habitacion` (`FechaEntrada` ASC, `FechaSalida` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -218,762 +218,772 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Alojamiento`
+-- Data for table `bidaion_tablas`.`Alojamiento`
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Catalonia Ronda', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Madrid', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Malaga', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Santander', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Alicante', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Granada', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Barcelona', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Cuevas', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel H10 Casa Mimosa', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Suitopia', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Carlos I', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('NH Madrid Lagasca', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Palacio de los Navas', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Leonardo Hotel', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Pension Paquita', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Acevi Villaroel', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Bahia de Santander', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Le Petit', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Eliseos', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Gran Sol', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Campaniola', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Bilbao', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Carlton', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ercilla', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Domine', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa San Roque', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Las Cuevas ', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa La Solana', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Lasaileku', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa El Olmo', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Berceo', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Baolafuente', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Uleta', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Covaleda', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa El mercado', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Waterfall', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Marmitako', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Satzu', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Renieblas', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Piolin', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Millán', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartameto miraflores', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento la catedral', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Riaza', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Briviesca', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartament Chez Pitu', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Tia Upe', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Rinxto', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Bonito', 'Madrid');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento LarDviura', 'Malaga');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Casalareina', 'Cantabria');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Golf', 'Alicante');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Aldapa', 'Bizkaia');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Francisco', 'Pontevedra');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Bella Easo', 'Granada');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Laurel', 'Barcelona');
-INSERT INTO `'bidaion-tablas'`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Memk', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Catalonia Ronda', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Madrid', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Malaga', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Santander', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Alicante', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Granada', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Barcelona', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Cuevas', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel H10 Casa Mimosa', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Suitopia', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Carlos I', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('NH Madrid Lagasca', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Palacio de los Navas', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Leonardo Hotel', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Pension Paquita', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Acevi Villaroel', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Bahia de Santander', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Le Petit', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Eliseos', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Gran Sol', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Campaniola', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ibis Bilbao', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Carlton', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Ercilla', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Hotel Domine', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa San Roque', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Las Cuevas ', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa La Solana', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Lasaileku', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa El Olmo', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Berceo', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Baolafuente', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Uleta', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Covaleda', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa El mercado', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Waterfall', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Marmitako', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Satzu', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Renieblas', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Piolin', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Casa Millán', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartameto miraflores', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento la catedral', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Riaza', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Briviesca', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartament Chez Pitu', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Tia Upe', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Rinxto', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Bonito', 'Madrid');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento LarDviura', 'Malaga');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Casalareina', 'Cantabria');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Golf', 'Alicante');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Aldapa', 'Bizkaia');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Francisco', 'Pontevedra');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Bella Easo', 'Granada');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Laurel', 'Barcelona');
+INSERT INTO `bidaion_tablas`.`Alojamiento` (`Nombre`, `Ubicacion`) VALUES ('Apartamento Memk', 'Madrid');
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Hotel`
+-- Data for table `bidaion_tablas`.`Hotel`
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('16', '5');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('17', '4');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('21', '3');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('11', '2');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('23', '1');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('1', '5');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('8', '4');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('25', '3');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('19', '2');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('24', '1');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('20', '5');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('9', '4');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('5', '3');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('7', '2');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('22', '1');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('6', '5');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('2', '4');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('3', '3');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('4', '2');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('18', '1');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('14', '5');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('13', '4');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('15', '3');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('10', '2');
-INSERT INTO `'bidaion-tablas'`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('12', '1');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('16', '5');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('17', '4');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('21', '3');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('11', '2');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('23', '1');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('1', '5');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('8', '4');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('25', '3');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('19', '2');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('24', '1');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('20', '5');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('9', '4');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('5', '3');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('7', '2');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('22', '1');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('6', '5');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('2', '4');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('3', '3');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('4', '2');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('18', '1');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('14', '5');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('13', '4');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('15', '3');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('10', '2');
+INSERT INTO `bidaion_tablas`.`Hotel` (`Cod_Hotel`, `Estrellas`) VALUES ('12', '1');
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Casa`
+-- Data for table `bidaion_tablas`.`Casa`
 -- -----------------------------------------------------------------
 
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '27');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '29');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '32');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '33');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '34');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '35');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '37');
-UPDATE `'bidaion-tablas'`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '40');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('46', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('53', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('55', '2', '5');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('49', '2', '3');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('45', '1', '7');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('51', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('54', '2', '4');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('52', '2', '5');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('43', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('50', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('56', '2', '8');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('57', '2', '4');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('44', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('48', '1', '5');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('47', '2', '4');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('42', '2', '6');
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('26', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('27', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('28', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('29', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('30', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('31', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('32', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('33', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('34', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('35', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('36', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('37', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('38', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('39', '1', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('40', '2', null);
-INSERT INTO `'bidaion-tablas'`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('41', '2', null);
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '27');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '29');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '32');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '33');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '34');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '35');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '37');
+UPDATE `bidaion_tablas`.`Casa_apartamento` SET `Piso` = NULL WHERE (`Cod_Casa` = '40');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('46', '1', '1');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('53', '1', '2');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('55', '2', '5');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('49', '2', '3');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('45', '1', '7');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('51', '1', '2');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('54', '2', '4');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('52', '2', '5');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('43', '1', '1');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('50', '1', '2');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('56', '2', '8');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('57', '2', '4');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('44', '1', '2');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('48', '1', '5');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('47', '2', '4');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('42', '2', '6');
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('26', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('27', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('28', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('29', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('30', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('31', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('32', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('33', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('34', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('35', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('36', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('37', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('38', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('39', '1', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('40', '2', null);
+INSERT INTO `bidaion_tablas`.`Casa_apartamento` (`Cod_Casa`, `Num_banos`, `Piso`) VALUES ('41', '2', null);
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Habitacion`
+-- Data for table `bidaion_tablas`.`Habitacion`
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H1', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H2', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H3', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H4', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H5', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '40');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H6', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H7', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H8', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H9', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H10', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H11', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H12', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H13', '35.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '150');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H14', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H15', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '300');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H16', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H17', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H18', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H19', '30.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '23', '40');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H20', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H21', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H22', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H23', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '170');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H24', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H25', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '1', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H26', '45', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H27', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '1', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H28', '50.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H29', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H30', '43', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '40');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H31', '37', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H32', '52', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H33', '37.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H34', '40.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H35', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H36', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H37', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H38', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H39', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '130');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H40', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '25', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H41', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H42', '50.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H43', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H44', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H45', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H46', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H47', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H48', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H49', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H50', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H51', '37', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '24', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H52', '38', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '24', '40');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H53', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H54', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H55', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H56', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '20', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H57', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H58', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H59', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H60', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '150');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H61', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H62', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H63', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H64', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H65', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '9', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H66', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '9', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H67', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H68', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H69', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H70', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H71', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H72', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '5', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H73', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H74', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H75', '25', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '7', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H76', '25', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '7', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H77', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H78', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H79', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H80', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H81', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '150');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H82', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H83', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H84', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H85', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H86', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H87', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H88', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H89', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H90', '36', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H91', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H92', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H93', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H94', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '2', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H95', '35.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H96', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '2', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H97', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H98', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H99', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H100', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H101', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '130');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H102', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '3', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H103', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '4', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H104', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H105', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H106', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H107', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '4', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H108', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H109', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H110', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H111', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H112', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H113', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H114', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '18', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H115', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H116', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H117', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H118', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H119', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H120', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '30');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H121', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '200');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H122', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '130');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H123', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '140');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H124', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '160');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H125', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '13', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H126', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H127', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H128', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '15', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H129', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H130', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '15', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H131', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H132', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H133', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H134', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H135', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H136', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H137', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '90');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H138', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '70');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H139', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H140', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '60');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H141', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '50');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H142', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '12', '100');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H143', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '12', '120');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H144', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '80');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C1', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '32', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C2', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '32', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C3', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '32', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C4', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '32', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C5', '18', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '26', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C6', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '26', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C7', '25', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '26', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C8', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '26', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C9', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '27', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C10', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '27', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C11', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '27', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C12', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '27', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C13', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '27', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C14', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '27', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C15', '6', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '27', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C16', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '27', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C17', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '28', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C18', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '28', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C19', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '28', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C20', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '28', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C21', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '28', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C22', '9', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '28', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C23', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '28', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C24', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '28', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C25', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '28', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C26', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '29', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C27', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '29', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C28', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '29', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C29', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '29', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C30', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '30', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C31', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '30', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C32', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '30', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C33', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '30', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C34', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '31', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C35', '12', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '31', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C36', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '31', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C37', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '31', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C38', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '31', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C39', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '31', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C40', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '31', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C41', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '31', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C42', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '33', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C43', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '33', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C44', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '33', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C45', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '33', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C46', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '33', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C47', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '33', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C48', '14', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '34', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C49', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '34', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C50', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '34', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C51', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '34', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C52', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '34', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C53', '18', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '34', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C54', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '34', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C55', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '34', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C56', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '35', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C57', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '35', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C58', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '35', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C59', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '35', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C60', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '36', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C61', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '36', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C62', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '36', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C63', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '36', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C64', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '36', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C65', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '36', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C66', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '37', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C67', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '37', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C68', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '37', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C69', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '37', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C70', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '38', '12');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C71', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '38', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C72', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '38', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C73', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '38', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C74', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '38', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C75', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '38', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C76', '6', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '38', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C77', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '38', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C78', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '39', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C79', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '39', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C80', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '39', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C81', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '39', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C82', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '39', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C83', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C84', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '40', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C85', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '40', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C86', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C87', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '40', '12');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C88', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '40', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C89', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C90', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '41', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C91', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '41', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C92', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '41', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C93', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '41', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C94', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '41', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C95', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '41', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A1', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '42', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A2', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '42', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A3', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '42', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A4', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '42', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A5', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '42', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A6', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '42', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A7', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '42', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A8', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '43', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A9', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '43', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A10', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '43', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A11', '13', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '43', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A12', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '44', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A13', '7', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '44', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A14', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '44', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A15', '10', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '44', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A16', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '44', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A17', '17', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '45', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A18', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '45', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A19', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '45', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A20', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '45', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A21', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '46', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A22', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '46', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A23', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '46', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A24', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '46', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A25', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '47', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A26', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '47', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A27', '8', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '47', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A28', '14', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '47', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A29', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '47', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A30', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '47', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A31', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '47', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A32', '14', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '48', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A33', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '48', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A34', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '48', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A35', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '48', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A36', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '49', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A37', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '49', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A38', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '49', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A39', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '49', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A40', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '49', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A41', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '49', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A42', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '49', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A43', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '50', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A44', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '50', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A45', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '50', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A46', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '50', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A47', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '50', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A48', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '51', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A49', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '51', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A50', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '51', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A51', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '51', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A52', '17', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '52', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A53', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '52', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A54', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '52', '10');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A55', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '52', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A56', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '52', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A57', '16', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '52', '18');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A58', '13', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '52', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A59', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '53', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A60', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '53', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A61', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '53', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A62', '13', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '53', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A63', '18', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '54', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A64', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '54', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A65', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '54', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A66', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '54', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A67', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '54', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A68', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '54', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A69', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '54', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A70', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '55', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A71', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '55', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A72', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '55', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A73', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '55', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A74', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '55', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A75', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '55', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A76', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '56', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A77', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '56', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A78', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '56', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A79', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '56', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A80', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '56', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A81', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '56', '5');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A82', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '57', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A83', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '57', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A84', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '57', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A85', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '57', '20');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A86', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '57', '15');
-INSERT INTO `'bidaion-tablas'`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A87', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '57', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H1', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H2', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H3', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H4', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H5', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '16', '40');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H6', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '16', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H7', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H8', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H9', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H10', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '21', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H11', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H12', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '21', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H13', '35.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '150');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H14', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H15', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '11', '300');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H16', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H17', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H18', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '11', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H19', '30.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '23', '40');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H20', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H21', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H22', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H23', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '170');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H24', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '23', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H25', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '1', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H26', '45', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H27', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '1', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H28', '50.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H29', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H30', '43', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '1', '40');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H31', '37', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H32', '52', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H33', '37.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H34', '40.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '8', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H35', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H36', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '8', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H37', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H38', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H39', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '130');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H40', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '25', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H41', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H42', '50.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '25', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H43', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H44', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H45', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H46', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H47', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '19', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H48', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '19', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H49', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H50', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H51', '37', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '24', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H52', '38', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '24', '40');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H53', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H54', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '24', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H55', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H56', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '20', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H57', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H58', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H59', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H60', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '20', '150');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H61', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H62', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H63', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H64', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '9', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H65', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '9', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H66', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '9', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H67', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H68', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H69', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H70', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H71', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '5', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H72', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '5', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H73', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H74', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H75', '25', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '7', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H76', '25', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '7', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H77', '30.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H78', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '7', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H79', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H80', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H81', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '150');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H82', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H83', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H84', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '22', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H85', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H86', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H87', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H88', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H89', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '6', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H90', '36', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '6', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H91', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H92', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H93', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H94', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '2', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H95', '35.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '2', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H96', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '2', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H97', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H98', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H99', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H100', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H101', '55.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '3', '130');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H102', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '3', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H103', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '4', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H104', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H105', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H106', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H107', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '4', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H108', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '4', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H109', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H110', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H111', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H112', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H113', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '18', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H114', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '18', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H115', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H116', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H117', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H118', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '14', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H119', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H120', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '14', '30');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H121', '60', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '200');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H122', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '130');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H123', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '140');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H124', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '160');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H125', '55', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '13', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H126', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '13', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H127', '45', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H128', '30', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '15', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H129', '35', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H130', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '15', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H131', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H132', '45.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '15', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H133', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H134', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H135', '55', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H136', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H137', '40', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '90');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H138', '30', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '10', '70');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H139', '50', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H140', '35', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '60');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H141', '35.5', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '50');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H142', '40.5', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '12', '100');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H143', '50', 'dormitorio', 'Habitación amplia y elegante con escritorio y baño privado que cuenta con secador de pelo, bañera de hidromasaje y albornoz. Cuenta también con TV de pantalla plana, recepción 24 horas, conexión Wi-Fi gratuita y aparcamiento privado gratuito.', '12', '120');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('H144', '40', 'dormitorio', 'Habitación acogedora y con una decoración sencilla. Tiene un escritorio y baño privado. Cuenta con conexión Wi-Fi gratuita, TV y nevera.', '12', '80');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C1', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '32', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C2', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '32', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C3', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '32', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C4', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '32', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C5', '18', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '26', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C6', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '26', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C7', '25', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '26', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C8', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '26', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C9', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '27', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C10', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '27', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C11', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '27', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C12', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '27', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C13', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '27', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C14', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '27', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C15', '6', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '27', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C16', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '27', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C17', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '28', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C18', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '28', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C19', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '28', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C20', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '28', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C21', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '28', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C22', '9', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '28', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C23', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '28', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C24', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '28', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C25', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '28', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C26', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '29', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C27', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '29', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C28', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '29', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C29', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '29', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C30', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '30', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C31', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '30', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C32', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '30', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C33', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '30', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C34', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '31', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C35', '12', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '31', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C36', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '31', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C37', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '31', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C38', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '31', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C39', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '31', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C40', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '31', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C41', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '31', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C42', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '33', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C43', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '33', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C44', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '33', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C45', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '33', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C46', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '33', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C47', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '33', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C48', '14', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '34', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C49', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '34', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C50', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '34', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C51', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '34', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C52', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '34', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C53', '18', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '34', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C54', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '34', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C55', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '34', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C56', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '35', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C57', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '35', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C58', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '35', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C59', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '35', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C60', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '36', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C61', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '36', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C62', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '36', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C63', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '36', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C64', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '36', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C65', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '36', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C66', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '37', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C67', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '37', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C68', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '37', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C69', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '37', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C70', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '38', '12');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C71', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '38', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C72', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '38', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C73', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '38', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C74', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '38', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C75', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '38', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C76', '6', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '38', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C77', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '38', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C78', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '39', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C79', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '39', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C80', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '39', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C81', '20', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '39', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C82', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '39', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C83', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C84', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '40', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C85', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '40', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C86', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C87', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '40', '12');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C88', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '40', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C89', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '40', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C90', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '41', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C91', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '41', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C92', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '41', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C93', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '41', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C94', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '41', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('C95', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '41', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A1', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '42', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A2', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '42', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A3', '5', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '42', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A4', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '42', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A5', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '42', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A6', '15', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '42', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A7', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '42', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A8', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '43', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A9', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '43', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A10', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '43', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A11', '13', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '43', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A12', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '44', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A13', '7', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '44', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A14', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '44', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A15', '10', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '44', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A16', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '44', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A17', '17', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '45', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A18', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '45', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A19', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '45', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A20', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '45', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A21', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '46', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A22', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '46', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A23', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '46', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A24', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '46', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A25', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '47', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A26', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '47', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A27', '8', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '47', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A28', '14', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '47', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A29', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '47', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A30', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '47', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A31', '12', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '47', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A32', '14', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '48', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A33', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '48', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A34', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '48', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A35', '14', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '48', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A36', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '49', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A37', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '49', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A38', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '49', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A39', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '49', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A40', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '49', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A41', '10', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '49', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A42', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '49', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A43', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '50', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A44', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '50', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A45', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '50', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A46', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '50', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A47', '4', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '50', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A48', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '51', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A49', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '51', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A50', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '51', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A51', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '51', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A52', '17', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '52', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A53', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '52', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A54', '6', 'baño', 'Aseo con lavabo y WC. Incluye toallas y jabón de mano.', '52', '10');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A55', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '52', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A56', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '52', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A57', '16', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '52', '18');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A58', '13', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '52', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A59', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '53', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A60', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '53', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A61', '15', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '53', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A62', '13', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '53', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A63', '18', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '54', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A64', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '54', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A65', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '54', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A66', '12', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '54', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A67', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '54', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A68', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '54', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A69', '30', 'garaje', 'Amplia parcela de garaje cerrada y buena altura. La entrada cuenta con espacio suficiente para la fácil maniobra.', '54', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A70', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '55', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A71', '16', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '55', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A72', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '55', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A73', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '55', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A74', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '55', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A75', '15', 'comedor', 'Cuenta con una mesa y sillas para 8 personas', '55', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A76', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '56', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A77', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '56', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A78', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '56', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A79', '12', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '56', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A80', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '56', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A81', '5', 'balcon', 'Modesto bacon con muebles de jardín, barbacoa y una hamaca', '56', '5');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A82', '20', 'dormitorio', 'Gran dormitorio con una decoración elegante y moderna con cama king Size, escritorio y vestidor.', '57', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A83', '15', 'dormitorio', 'Dormitorio moderno con una cama individual, escritorio y un armario', '57', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A84', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '57', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A85', '10', 'baño', 'Baño con bañera de hidromasaje y ducha efecto lluvia. Incluye champú, gel de baño, jabón de manos, secador de pelo,  y toallas limpias para lavabo, ducha y alfombra de baño.', '57', '20');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A86', '13', 'sala', 'Cuenta con TV de pantalla plana, Home cinema, y play Station 4 También gran sofá reclinable, una butaca y  una mesa o escritorio con espacio para colocar un portátil y una silla cómoda para trabajar.', '57', '15');
+INSERT INTO `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`, `Superficie`, `Tipo_habitacion`, `Descripcion`, `Cod_Alojamiento`, `Precio`) VALUES ('A87', '15', 'cocina', 'Cocina moderna con electrodomésticos nuevos. Cuenta con mesa de comedor, cafetera, productos de limpieza, vitrocerámica de 4 fogones, horno, utensilios de cocina, microondas, nevera y lavadora.', '57', '15');
 
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Camas`
+-- Data for table `bidaion_tablas`.`Camas`
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H1', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H2', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H3', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H4', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H5', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H6', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H7', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H8', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H9', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H10', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H11', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H12', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H13', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H14', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H15', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H16', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H17', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H18', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H19', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H20', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H21', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H22', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H23', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H24', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H25', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H26', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H27', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H28', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H29', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H30', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H31', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H32', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H33', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H34', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H35', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H36', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H37', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H38', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H39', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H40', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H41', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H42', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H43', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H44', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H45', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H46', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H47', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H48', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H49', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H50', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H51', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H52', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H53', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H54', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H55', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H56', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H57', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H58', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H59', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H60', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H61', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H62', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H63', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H64', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H65', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H66', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H67', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H68', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H69', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H70', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H71', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H72', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H73', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H74', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H75', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H76', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H77', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H78', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H79', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H80', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H81', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H82', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H83', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H84', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H85', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H86', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H87', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H88', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H89', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H90', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H91', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H92', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H93', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H94', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H95', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H96', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H97', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H98', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H99', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H100', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H101', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H102', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H103', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H104', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H105', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H106', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H107', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H108', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H109', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H110', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H111', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H112', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H113', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H114', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H115', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H116', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H117', '2', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H118', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H119', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H120', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H121', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H122', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H123', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H124', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H125', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H126', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H127', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H128', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H129', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H130', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H131', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H132', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H133', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H134', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H135', '1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H136', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H137', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H138', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H139', '2', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H140', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H141', '1', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H142', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H143', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H144', '2');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`, `Matrimonio`) VALUES ('A1', '1', NULL);
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A12', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A17', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('A21', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A25', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A30', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('A32', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A36', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A43', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A48', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A52', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A57', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A59', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A6', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A63', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A68', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A70', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A71', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A76', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A77', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A82', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A83', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A9', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C1', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C10', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('C17', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C18', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C26', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C30', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C34', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C35', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('C36', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C48', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C49', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C5', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C56', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C62', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C65', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C66', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C70', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C73', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C78', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C83', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C86', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C89', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C9', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C90', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C95', '1');
-INSERT INTO `'bidaion-tablas'`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C42', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H1', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H2', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H3', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H4', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H5', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H6', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H7', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H8', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H9', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H10', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H11', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H12', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H13', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H14', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H15', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H16', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H17', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H18', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H19', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H20', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H21', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H22', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H23', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H24', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H25', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H26', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H27', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H28', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H29', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H30', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H31', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H32', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H33', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H34', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H35', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H36', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H37', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H38', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H39', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H40', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H41', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H42', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H43', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H44', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H45', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H46', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H47', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H48', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H49', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H50', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H51', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H52', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H53', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H54', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H55', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H56', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H57', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H58', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H59', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H60', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H61', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H62', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H63', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H64', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H65', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H66', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H67', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H68', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H69', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H70', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H71', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H72', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H73', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H74', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H75', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H76', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H77', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H78', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H79', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H80', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H81', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H82', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H83', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H84', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H85', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H86', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H87', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H88', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H89', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H90', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H91', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H92', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H93', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H94', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H95', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H96', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H97', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H98', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H99', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H100', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H101', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H102', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H103', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H104', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H105', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H106', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H107', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H108', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H109', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H110', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H111', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H112', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H113', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H114', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H115', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H116', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H117', '2', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H118', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H119', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H120', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H121', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H122', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Infantil`) VALUES ('H123', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H124', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H125', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H126', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H127', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H128', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H129', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H130', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('H131', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H132', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H133', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H134', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H135', '1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H136', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H137', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H138', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H139', '2', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H140', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`, `Matrimonio`) VALUES ('H141', '1', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H142', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H143', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('H144', '2');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`, `Matrimonio`) VALUES ('A1', '1', NULL);
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A12', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A17', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('A21', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A25', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A30', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('A32', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A36', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A43', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A48', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A52', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A57', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A59', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A6', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A63', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A68', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A70', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A71', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A76', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A77', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A82', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('A83', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('A9', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C1', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C10', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('C17', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C18', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C26', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C30', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C34', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C35', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Infantil`) VALUES ('C36', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C48', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C49', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C5', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C56', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C62', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C65', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C66', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C70', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C73', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C78', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C83', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C86', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C89', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Matrimonio`) VALUES ('C9', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C90', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C95', '1');
+INSERT INTO `bidaion_tablas`.`Camas` (`Cod_Habitacion`, `Individual`) VALUES ('C42', '1');
+
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Promocion`
+-- AÑADIR FECHA MODIFICACION A USUARIO
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('golf', 52, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('riaza', 44, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('solana', 28, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('waterfall', 36, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sol', 20, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisalicante', 5, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('suitopia', 10, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('aldapa', 53, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('briviesca', 45, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lasaileku', 29, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('marmitako', 37, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlton', 23, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('domine', 25, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ercilla', 24, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisbilbao', 22, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('pitu', 46, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('francisco', 54, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('olmo', 30, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('satzu', 38, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('campaniola', 21, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlosi', 11, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('laurel', 56, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('rinxto', 48, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('baolafuente', 32, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('piolin', 40, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('acevi', 16, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mimosa', 9, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('barcelona', 7, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bonito', 49, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('memk', 57, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('millan', 41, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('uleta', 33, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismadrid', 2, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('paquita', 15, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lagasca', 12, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('casalareina', 51, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('catedral', 43, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mercado', 35, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('cuevas', 27, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bahia', 17, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('hotelcuevas', 8, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibissantander', 4, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('petit', 18, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lardviura', 50, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('miraflores', 42, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('covaleda', 34, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sanroque', 26, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ronda', 1, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('eliseos', 19, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismalaga', 3, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bellaeaso', 55, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('tiaupe', 47, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('berceo', 31, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('renieblas', 39, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisgranada', 6, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('leonardo', 14, 5);
-INSERT INTO `'bidaion-tablas'`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('palacio', 13, 5);
+ALTER TABLE `Usuario`
+ADD COLUMN `fecha_modificacion` DATE;
 
 -- -----------------------------------------------------------------
--- Data for table `'bidaion-tablas'`.`Fechas`
+-- Data for table `bidaion_tablas`.`Promocion`
 -- -----------------------------------------------------------------
 
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('TemporadaEstival', '2019/06/01', '2019/08/30', '0.20');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('FueraTemporada', '2019/09/01', '2020/05/31', '0.0');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero1', '2020/01/01', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero6', '2020/01/06', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril19', '2020/04/19', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril21', '2020/04/21', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Mayo1', '2020/05/01', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Octubre12', '2019/10/12', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2019/11/01', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2019/12/06', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2019/12/08', '0.10');
-INSERT INTO `'bidaion-tablas'`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('golf', 52, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('riaza', 44, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('solana', 28, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('waterfall', 36, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sol', 20, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisalicante', 5, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('suitopia', 10, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('aldapa', 53, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('briviesca', 45, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lasaileku', 29, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('marmitako', 37, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlton', 23, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('domine', 25, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ercilla', 24, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisbilbao', 22, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('pitu', 46, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('francisco', 54, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('olmo', 30, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('satzu', 38, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('campaniola', 21, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('carlosi', 11, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('laurel', 56, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('rinxto', 48, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('baolafuente', 32, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('piolin', 40, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('acevi', 16, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mimosa', 9, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('barcelona', 7, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bonito', 49, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('memk', 57, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('millan', 41, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('uleta', 33, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismadrid', 2, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('paquita', 15, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lagasca', 12, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('casalareina', 51, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('catedral', 43, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('mercado', 35, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('cuevas', 27, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bahia', 17, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('hotelcuevas', 8, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibissantander', 4, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('petit', 18, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('lardviura', 50, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('miraflores', 42, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('covaleda', 34, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('sanroque', 26, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ronda', 1, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('eliseos', 19, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibismalaga', 3, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('bellaeaso', 55, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('tiaupe', 47, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('berceo', 31, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('renieblas', 39, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('ibisgranada', 6, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('leonardo', 14, 5);
+INSERT INTO `bidaion_tablas`.`Promocion` (`Cod_Promocion`,`Cod_Alojamiento`,`Descuento`) VALUES ('palacio', 13, 5);
 
+-- -----------------------------------------------------------------
+-- Data for table `bidaion_tablas`.`Fechas`
+-- -----------------------------------------------------------------
+
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('TemporadaEstival', '2019/06/01', '2019/08/30', '0.20');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Fecha_fin`, `Descuento`) VALUES ('FueraTemporada', '2019/09/01', '2020/05/31', '0.0');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero1', '2020/01/01', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Enero6', '2020/01/06', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril19', '2020/04/19', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Abril21', '2020/04/21', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Mayo1', '2020/05/01', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Octubre12', '2019/10/12', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Noviembre1', '2019/11/01', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre6', '2019/12/06', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre8', '2019/12/08', '0.10');
+INSERT INTO `bidaion_tablas`.`Fechas` (`Codigo_fecha`, `Fecha_inicio`, `Descuento`) VALUES ('Diciembre25', '2019/12/25', '0.10');
+
+
+-- PROCEDIMIENTO CON CURSOR 
 
 DROP PROCEDURE IF EXISTS conseguir_nombre_apellidos;
 
 DELIMITER $$
-CREATE PROCEDURE `'bidaion-tablas'`.conseguir_nombre_apellidos (IN DNI_usuario char(9))
+CREATE PROCEDURE `bidaion_tablas`.conseguir_nombre_apellidos (IN DNI_usuario char(9))
 BEGIN
 	declare Nombre_usuario varchar(20);
     declare Apellido_usuario varchar(20);
     declare NomApe text default '';
     DECLARE done INT DEFAULT FALSE;
-    declare nombre_apellidos CURSOR FOR SELECT Nombre, Apellido from `'bidaion-tablas'`.Usuario where DNI = DNI_usuario;
+    declare nombre_apellidos CURSOR FOR SELECT Nombre, Apellido from `bidaion_tablas`.Usuario where DNI = DNI_usuario;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
     
     open nombre_apellidos;
@@ -986,6 +996,8 @@ BEGIN
     select NomApe;
 END$$
 
+
+-- VISTA DE CASA, PARA MOSTRAR LA SUPERFICIE Y EL PRECIO
 drop view if exists vista_casa;
 
 CREATE VIEW 
@@ -997,6 +1009,16 @@ FROM Habitacion inner join Casa_apartamento
 on Habitacion.Cod_Alojamiento = Casa_apartamento.Cod_Casa
 WHERE Cod_Habitacion LIKE 'A%' || Cod_Habitacion LIKE 'C%' GROUP BY Cod_Alojamiento;
 
+-- TRIGGER PARA COGER LA FECHA DE MODIFICACION DE UN USUARIO
+
+
+DROP TRIGGER IF EXISTS fecha_modificacion;
+DELIMITER $$
+CREATE TRIGGER fecha_modificacion
+before UPDATE ON `Usuario`
+FOR EACH ROW BEGIN
+set  NEW.fecha_modificacion=NOW();
+END $$
 
 -- CREACION DE USUARIOS 
 
@@ -1006,7 +1028,9 @@ CREATE USER 'ver'@'localhost' IDENTIFIED BY 'hola1';
 CREATE USER 'editar'@'localhost' IDENTIFIED BY 'hola2';
 
 -- DAR PRIVILEGIOS
-GRANT ALL PRIVILEGES ON `'bidaion-tablas'`.* to 'administrador'@'localhost';
-GRANT SELECT ON `'bidaion-tablas'`.* to 'ver'@'localhost';
-GRANT INSERT, SELECT, UPDATE ON `'bidaion-tablas'`.* to 'editar'@'localhost';
+GRANT ALL PRIVILEGES ON bidaion_tablas.* to 'administrador'@'localhost';
+GRANT SELECT ON bidaion_tablas.* to 'ver'@'localhost';
+GRANT INSERT, SELECT, UPDATE ON bidaion_tablas.* to 'editar'@'localhost';
+
+
 
