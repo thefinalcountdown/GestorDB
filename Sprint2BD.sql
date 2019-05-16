@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Usuario` (
   `Nombre` VARCHAR(45) NOT NULL,
   `Apellido` VARCHAR(45) NOT NULL,
   `Clave` VARCHAR(45) NOT NULL,
-  `Fecha_Registro` DATE,
+  `Fecha_Registro` DATETIME,
   `Fecha_Modificacion` DATE,
   PRIMARY KEY (`DNI`))
 ENGINE = InnoDB;
