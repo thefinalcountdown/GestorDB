@@ -1206,5 +1206,6 @@ GRANT ALL PRIVILEGES ON bidaion_tablas.* to 'administrador'@'localhost';
 GRANT SELECT ON bidaion_tablas.* to 'ver'@'localhost';
 GRANT INSERT, SELECT, UPDATE ON bidaion_tablas.* to 'editar'@'localhost';
 
--- select Cod_Alojamiento, COUNT(Cod_reserva) from Reserva GROUP BY cod_Alojamiento ORDER BY Cod_Alojamiento DESC;
+-- SELECT Alojamiento.Cod_Alojamiento, COUNT(Reserva.Cod_reserva) as codigoReserva from `bidaion_tablas`.Alojamiento 
+-- LEFT JOIN Reserva ON Alojamiento.Cod_Alojamiento = Reserva.Cod_Alojamiento GROUP BY Cod_Alojamiento;
 
