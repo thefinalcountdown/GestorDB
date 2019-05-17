@@ -93,6 +93,28 @@ CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Camas` (
 );
 
 -- -----------------------------------------------------
+-- Table `'bidaion-tablas'`.`Servicios`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `'bidaion-tablas'`.`Servicios` ;
+
+CREATE TABLE IF NOT EXISTS `'bidaion-tablas'`.`Servicios` (
+	`Cod_Servicio` INT NOT NULL AUTO_INCREMENT,
+	`Cod_Alojamiento` INT NOT NULL,
+    `Wifi` int,
+    `Piscina` int,
+    `Spa` int,
+    `Parking` int,
+    `AireAcondicionado` int,
+    `Restaurante` int,
+    `Bar` int,
+    `Gimnasio` int,
+    PRIMARY KEY (`Cod_Servicio`),
+		FOREIGN KEY (`Cod_Alojamiento`)
+		REFERENCES `'bidaion-tablas'`.`Alojamiento` (`Cod_Alojamiento`)
+);
+
+
+-- -----------------------------------------------------
 -- Table `bidaion_tablas`.`Fechas`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `bidaion_tablas`.`Fechas` ;
@@ -1057,8 +1079,67 @@ INSERT INTO `bidaion_tablas`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Co
 INSERT INTO `bidaion_tablas`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle57', '16', '56987', '56');
 INSERT INTO `bidaion_tablas`.`Direccion` (`Calle`, `Numero`, `CodigoPostal`, `Cod_Alojamiento`) VALUES ('calle58', '36', '12435', '57');
 
+-- -----------------------------------------------------------------
+-- Data for table `bidaion_tablas`.`Servicios`
+-- -----------------------------------------------------------------
 
-
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('114', '57', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('113', '56', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Gimnasio`) VALUES ('112', '55', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Bar`) VALUES ('111', '54', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `Restaurante`) VALUES ('110', '53', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Bar`) VALUES ('109', '52', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Restaurante`) VALUES ('108', '51', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('107', '50', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('106', '49', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Bar`) VALUES ('105', '48', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `AireAcondicionado`, `Gimnasio`) VALUES ('104', '47', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('103', '46', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `AireAcondicionado`, `Bar`) VALUES ('102', '45', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Restaurante`) VALUES ('101', '44', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('100', '43', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('99', '42', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('98', '41', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`) VALUES ('97', '40', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Parking`, `AireAcondicionado`, `Bar`, `Gimnasio`) VALUES ('96', '39', '1', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('95', '38', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('94', '37', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`) VALUES ('93', '36', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Parking`, `AireAcondicionado`, `Bar`, `Gimnasio`) VALUES ('92', '35', '1', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Parking`, `Restaurante`, `Bar`) VALUES ('91', '34', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('90', '33', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('89', '32', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('88', '31', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Restaurante`) VALUES ('87', '30', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Parking`, `AireAcondicionado`, `Gimnasio`) VALUES ('86', '29', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Parking`, `AireAcondicionado`, `Bar`, `Gimnasio`) VALUES ('85', '28', '1', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Parking`, `AireAcondicionado`, `Bar`, `Gimnasio`) VALUES ('84', '27', '1', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Parking`, `Restaurante`, `Bar`) VALUES ('83', '26', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('82', '25', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Parking`, `Restaurante`, `Gimnasio`) VALUES ('81', '24', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('80', '23', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `AireAcondicionado`, `Bar`) VALUES ('79', '22', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`) VALUES ('78', '21');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `AireAcondicionado`, `Restaurante`, `Bar`) VALUES ('77', '20', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Parking`, `AireAcondicionado`, `Gimnasio`) VALUES ('76', '19', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`) VALUES ('75', '18');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`, `Parking`, `Gimnasio`) VALUES ('74', '17', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Parking`, `Restaurante`, `Bar`) VALUES ('73', '16', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Restaurante`) VALUES ('72', '15', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`) VALUES ('71', '14', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Spa`, `Restaurante`, `Bar`) VALUES ('70', '13', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `AireAcondicionado`, `Gimnasio`) VALUES ('69', '12', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `AireAcondicionado`, `Restaurante`, `Bar`) VALUES ('68', '11', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`, `Parking`, `AireAcondicionado`, `Gimnasio`) VALUES ('67', '10', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Parking`, `Restaurante`, `Bar`) VALUES ('66', '9', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`) VALUES ('65', '8');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Parking`, `AireAcondicionado`) VALUES ('64', '7', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Spa`, `Parking`, `AireAcondicionado`, `Restaurante`) VALUES ('63', '6', '1', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`, `Parking`, `AireAcondicionado`, `Bar`) VALUES ('62', '5', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Piscina`, `Spa`, `Parking`, `AireAcondicionado`, `Bar`) VALUES ('61', '4', '1', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `AireAcondicionado`, `Gimnasio`) VALUES ('60', '3', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Parking`, `Restaurante`, `Bar`) VALUES ('59', '2', '1', '1', '1', '1');
+INSERT INTO `'bidaion-tablas'`.`Servicios` (`Cod_Servicio`, `Cod_Alojamiento`, `Wifi`, `Piscina`, `Spa`, `Parking`, `AireAcondicionado`, `Restaurante`) VALUES ('58', '1', '1', '1', '1', '1', '1', '1');
 
 
 
@@ -1125,5 +1206,5 @@ GRANT ALL PRIVILEGES ON bidaion_tablas.* to 'administrador'@'localhost';
 GRANT SELECT ON bidaion_tablas.* to 'ver'@'localhost';
 GRANT INSERT, SELECT, UPDATE ON bidaion_tablas.* to 'editar'@'localhost';
 
-
+-- select Cod_Alojamiento, COUNT(Cod_reserva) from Reserva GROUP BY cod_Alojamiento ORDER BY Cod_Alojamiento DESC;
 
