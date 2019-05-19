@@ -242,10 +242,11 @@ PRIMARY KEY(`Codigo_fecha`)
 DROP TABLE IF EXISTS `bidaion_tablas`.`Reserva_Habitacion` ;
 
 CREATE TABLE IF NOT EXISTS `bidaion_tablas`.`Reserva_Habitacion` (
+  `Cod_Reserva_Habitacion` int auto_increment,
   `Habitacion_Alojamiento_Num_Habitacion` varchar(20) NOT NULL,
   `FechaEntrada` DATE NOT NULL,
   `FechaSalida` DATE NOT NULL,
-  PRIMARY KEY (`Habitacion_Alojamiento_Num_Habitacion`),
+  PRIMARY KEY (`Cod_Reserva_Habitacion`),
   CONSTRAINT `fk_Reserva_has_Habitacion_Alojamiento_Habitacion_Alojamiento1`
     FOREIGN KEY (`Habitacion_Alojamiento_Num_Habitacion`)
     REFERENCES `bidaion_tablas`.`Habitacion` (`Cod_Habitacion`)
